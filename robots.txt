@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shigyn.github.io/georgia-gomez/sitemap.xml
+Sitemap: https://shigyn.github.io/sensidyf/sitemap.xml
