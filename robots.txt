@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shigyn.github.io/georgia-gomez/sitemap.xml
