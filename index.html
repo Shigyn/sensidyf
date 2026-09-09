@@ -40,6 +40,7 @@
   "description": "Accompagnement psychopédagogique d'enfants et d'adolescents présentant des troubles du neurodéveloppement à Béziers : autisme, trisomie 21, syndromes génétiques, trouble développemental du langage, déficience intellectuelle, DYS, TDA(H). Communication alternative et augmentée, gestion des comportements défis selon l'approche ABA, réintégration des réflexes archaïques, rééducation oro-myo-faciale, accompagnement à la parentalité et aide aux démarches MDPH.",
   "image": "https://shigyn.github.io/sensidyf/photos/hero-1600.webp",
   "url": "https://shigyn.github.io/sensidyf/",
+  "telephone": "+33788282082",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "5 rue de la Brasserie",
@@ -101,7 +102,13 @@
   --greige:   #DCD1C7;
   --vert:     #38524A;   /* le vert profond de ses textes */
   --vert-mid: #566C62;
-  --menthe:   #57B28B;   /* le vert de ses pastilles */
+  /* Deux verts menthe, pour la meme raison que les deux dores : le
+     sien (#57B28B, celui de ses pastilles) est CLAIR. Mesure sur
+     blanc : 2,58:1, sous les 3 exiges meme d'un grand texte. Il
+     reste donc decoratif, et le texte prend la version foncee,
+     mesuree a 4,83:1. */
+  --menthe:     #57B28B;   /* decoratif uniquement */
+  --menthe-txt: #357F5E;   /* le meme, assombri pour etre lu */
   --rose:     #D4A5A5;   /* la branche du logo */
   --rose-pale:#EAD6D3;
   /* DEUX dores, et ce n'est pas un caprice de nuancier.
@@ -313,6 +320,64 @@ section { padding: var(--rythme) 0 }
   text-transform: uppercase; color: var(--dore-txt); margin-bottom: 8px;
 }
 
+/* --- Sous-titre de groupe dans les prestations ---------------------
+   Les accompagnements individuels et les groupes ne se choisissent pas
+   de la meme facon : les separer evite qu'un parent cherchant une
+   seance individuelle croie devoir passer par un groupe. */
+.sous-titre {
+  font-size: clamp(19px, 2.2vw, 23px); color: var(--vert);
+  margin: 0 0 18px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--greige);
+}
+.note-presta {
+  margin-top: 22px; color: var(--plume); font-size: 15.5px; max-width: 46em;
+}
+/* Les nouveautes de novembre. Un lisere, pas une pastille criarde :
+   c'est une information, pas une promotion. */
+.carte-nouveau { border-color: var(--rose) }
+.carte-nouveau .sigle { color: var(--vert); background: var(--rose-pale);
+  padding: 3px 9px; border-radius: 999px; }
+
+/* --- Tarifs ---------------------------------------------------------
+   Une liste et non une grille de cartes : quatre prix se comparent en
+   descendant une colonne, pas en balayant quatre boites. Le prix est
+   aligne a droite et en chiffres tabulaires pour que les montants se
+   superposent exactement. */
+.tarifs { display: grid; gap: 2px; background: var(--greige);
+  border: 1px solid var(--greige); border-radius: var(--r); overflow: hidden }
+.tarif {
+  background: #fff; padding: 22px 24px;
+  display: grid; gap: 4px 20px; align-items: baseline;
+  grid-template-columns: 1fr auto;
+}
+.tarif-nom { font-family: var(--disp); font-size: 19px; font-weight: 600; color: var(--vert) }
+.tarif-note { grid-column: 1; color: var(--plume); font-size: 15px; max-width: 46em }
+.tarif-prix {
+  grid-row: 1 / span 2; grid-column: 2; align-self: center;
+  font-family: var(--disp); font-weight: 700; font-size: clamp(24px, 3vw, 30px);
+  color: var(--vert); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.tarif-gratuit { color: var(--menthe-txt) }
+/* La ligne mise en avant : celle qui coute le moins cher a l'heure. */
+.tarif-avant { background: linear-gradient(rgba(212,165,165,.10), rgba(212,165,165,.10)), #fff }
+@media (max-width: 560px) {
+  /* Sous 560 px, le prix passe SOUS le nom : garde a droite, il
+     comprimerait le libelle jusqu'a le casser en trois lignes. */
+  .tarif { grid-template-columns: 1fr }
+  .tarif-prix { grid-row: auto; grid-column: 1; margin-top: 6px }
+}
+
+/* --- Temoignages ----------------------------------------------------- */
+.temoin-texte { color: var(--encre); font-size: 15.5px; font-style: italic }
+.temoin-nom { margin-top: 12px; font-size: 13.5px; font-weight: 600; color: var(--dore-txt) }
+/* Ce qui attend un contenu reel. Visible sans etre criard : il faut
+   qu'on le remarque en relisant, et qu'on ne puisse pas le publier
+   sans s'en apercevoir. */
+.a-completer {
+  color: var(--plume); font-style: italic;
+  border-left: 2px dashed var(--rose); padding-left: 12px;
+}
+
 /* --- Le module « qui je suis » -------------------------------------------
    Nicolas voulait qu'on voie d'ou elle vient. Tout ce qui est ecrit ici
    sort de SES publications — le passage sur les enfants mutiques est
@@ -431,6 +496,8 @@ footer a:hover { color: var(--vert) }
     <nav>
       <a href="#accompagnements">Accompagnements</a>
       <a href="#parcours">Qui je suis</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#temoignages">Témoignages</a>
       <a href="#financement">Financement</a>
       <a href="#contact" class="bt bt-plein" style="min-height:46px;padding:0 22px;font-size:15px">Me contacter</a>
     </nav>
@@ -460,7 +527,7 @@ footer a:hover { color: var(--vert) }
         </div>
 
         <div class="hero-actions reveal" data-vu data-retard="4">
-          <a class="bt bt-plein" href="#contact" data-editable-zone="hero_cta">Appel découverte gratuit · 15 min</a>
+          <a class="bt bt-plein" href="#contact" data-editable-zone="hero_cta">Appel découverte gratuit</a>
           <a class="bt bt-nu" href="#accompagnements">Voir les accompagnements</a>
         </div>
       </div>
@@ -519,15 +586,16 @@ footer a:hover { color: var(--vert) }
     </div>
   </div>
 
-  <!-- ======================= LES ACCOMPAGNEMENTS ==================== -->
+  <!-- ========================= LES PRESTATIONS ====================== -->
   <section id="accompagnements">
     <div class="wrap">
       <div class="tete-section reveal">
         <div class="brindille"></div>
-        <h2 data-editable-zone="services_titre">Ce que je propose</h2>
+        <h2 data-editable-zone="services_titre">Nos prestations</h2>
         <p data-editable-zone="services_intro">Chaque accompagnement se construit à partir de l'enfant et de sa famille, jamais d'un protocole appliqué à l'identique. Voici les outils dont je dispose.</p>
       </div>
 
+      <h3 class="sous-titre reveal" data-editable-zone="presta_groupe_1">Les accompagnements individuels</h3>
       <div class="cartes">
         <article class="carte reveal">
           <div class="carte-txt">
@@ -571,25 +639,99 @@ footer a:hover { color: var(--vert) }
 
         <article class="carte reveal" data-retard="1">
           <div class="carte-txt">
+            <span class="sigle">Parcours</span>
+            <h3>Référente de parcours éducatif</h3>
+            <p data-editable-zone="service_parcours">Je peux tenir le fil entre l'école, les professionnels de santé, les structures et la famille : celui qui connaît l'enfant dans son ensemble et fait le lien entre des interlocuteurs qui, souvent, ne se parlent pas.</p>
+          </div>
+        </article>
+
+        <article class="carte reveal" data-retard="2">
+          <div class="carte-txt">
             <span class="sigle">Famille</span>
             <h3>Parentalité et routines</h3>
             <p data-editable-zone="service_parentalite">Mise en place de routines qui tiennent, accompagnement des parents et des aidants, guidance au quotidien — sans jugement sur ce qui a déjà été essayé.</p>
           </div>
         </article>
 
+        <article class="carte reveal" data-retard="3">
+          <div class="carte-txt">
+            <span class="sigle">Polyhandicap</span>
+            <h3>Accompagnement du polyhandicap</h3>
+            <p data-editable-zone="service_polyhandicap">Maintenir les fonctions exécutives, la mémoire, un niveau scolaire quand il y en a un, et proposer des activités éducatives, pédagogiques ou simplement ludiques. Cet accompagnement se fait <strong>à domicile</strong> : mon cabinet est à l'étage.</p>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="sous-titre reveal" style="margin-top:52px" data-editable-zone="presta_groupe_2">Les groupes — à partir de novembre</h3>
+      <div class="cartes">
+        <article class="carte carte-nouveau reveal">
+          <div class="carte-txt">
+            <span class="sigle">Nouveau</span>
+            <h3>Groupes d'habiletés sociales</h3>
+            <p data-editable-zone="service_habiletes">Apprendre à entrer en relation, décoder l'implicite, gérer un désaccord — en petit groupe, jusqu'au collège. Les groupes d'habiletés sociales font partie des <strong>recommandations de la Haute Autorité de Santé</strong>.</p>
+          </div>
+        </article>
+
+        <article class="carte carte-nouveau reveal" data-retard="1">
+          <div class="carte-txt">
+            <span class="sigle">Nouveau</span>
+            <h3>Ateliers de langage</h3>
+            <p data-editable-zone="service_langage">Des séances de groupe centrées sur la communication : vocabulaire fonctionnel, tour de parole, compréhension, supports visuels. Ce qui se travaille à plusieurs ne se travaille pas seul.</p>
+          </div>
+        </article>
+
         <article class="carte reveal" data-retard="2">
+          <div class="carte-txt">
+            <span class="sigle">Bilan</span>
+            <h3>Le bilan psychopédagogique</h3>
+            <p data-editable-zone="service_bilan">Un point complet sur la sphère cognitive, éducative, comportementale et émotionnelle, sur les apprentissages, et sur les fonctions exécutives : mémoire de travail, inhibition, concentration, flexibilité. C'est de là que part l'accompagnement.</p>
+          </div>
+        </article>
+
+        <article class="carte reveal" data-retard="3">
           <div class="carte-txt">
             <span class="sigle">MDPH</span>
             <h3>Aide aux démarches</h3>
             <p data-editable-zone="service_mdph">Aide au montage du dossier MDPH : ce qu'il faut y mettre, comment le formuler, quelles pièces réunir. Un dossier bien construit change ce qui sera accordé.</p>
           </div>
         </article>
+      </div>
 
-        <article class="carte reveal" data-retard="3">
+      <p class="note-presta reveal" data-editable-zone="services_note">Création d'outils sur mesure, location et vente de matériel spécialisé : ce qui fonctionne en séance doit pouvoir fonctionner à la maison et en classe.</p>
+    </div>
+  </section>
+
+  <!-- ================= AU CABINET OU A DOMICILE ===================== -->
+  <section id="ou">
+    <div class="wrap">
+      <div class="tete-section reveal">
+        <div class="brindille"></div>
+        <h2 data-editable-zone="ou_titre">Au cabinet, ou chez vous</h2>
+        <p data-editable-zone="ou_intro">Je ne reçois pas seulement en cabinet : je me déplace. Pour certaines familles c'est plus simple, pour d'autres c'est la seule solution — et pour l'enfant, travailler dans son propre environnement change souvent beaucoup de choses.</p>
+      </div>
+
+      <div class="cartes">
+        <article class="carte reveal">
           <div class="carte-txt">
-            <span class="sigle">Matériel</span>
-            <h3>Outils et matériel spécialisé</h3>
-            <p data-editable-zone="service_materiel">Création d'outils sur mesure, location et vente de matériel spécialisé — pour que ce qui fonctionne en séance continue de fonctionner à la maison et en classe.</p>
+            <span class="sigle">Le cabinet</span>
+            <h3>5 rue de la Brasserie, Béziers</h3>
+            <p data-editable-zone="ou_cabinet">Un espace pensé pour les sens, avec le matériel sous la main. Le cabinet est à l'étage : il n'est pas accessible en fauteuil, et c'est pourquoi certains accompagnements se font uniquement à domicile.</p>
+          </div>
+        </article>
+
+        <article class="carte reveal" data-retard="1">
+          <div class="carte-txt">
+            <span class="sigle">À domicile</span>
+            <h3>Je me déplace chez vous</h3>
+            <p data-editable-zone="ou_domicile">Séances au domicile, dans l'environnement réel de l'enfant — celui où les routines se jouent vraiment. Des frais de déplacement s'ajoutent alors au tarif de la séance.</p>
+          </div>
+        </article>
+
+        <article class="carte reveal" data-retard="2">
+          <div class="carte-txt">
+            <span class="sigle">PCH &amp; CESU</span>
+            <h3>Employée directement à domicile</h3>
+            <p data-editable-zone="ou_pch">Les familles qui disposent de la <strong>PCH</strong> peuvent m'employer directement à domicile — c'est déjà le cas pour plusieurs d'entre elles. L'intervention peut aussi passer par le <strong>CESU</strong>.</p>
           </div>
         </article>
       </div>
@@ -636,12 +778,93 @@ footer a:hover { color: var(--vert) }
                liste est vide et balisee : elle la remplira depuis son
                espace, ou nous la saisirons a partir de ce qu'elle nous
                donnera. -->
-          <div class="encart" style="margin-top:30px" data-editable-zone="parcours_formations">
-            <h3>Formations et diplômes</h3>
-            <p>À compléter — cette liste sera renseignée avec les intitulés exacts, les organismes et les années.</p>
+          <div class="encart" style="margin-top:30px">
+            <h3 data-editable-zone="formations_titre">Me former fait partie du travail</h3>
+            <p data-editable-zone="formations_texte_1">Je me forme très régulièrement et je me remets à jour — ABA, CAA, et le reste. J'y mets une importance capitale, parce que les pratiques évoluent et qu'un accompagnement fondé sur ce qui se faisait il y a dix ans n'est pas un accompagnement.</p>
+            <p data-editable-zone="formations_texte_2">Je travaille dans le cadre des <strong>recommandations de la Haute Autorité de Santé</strong>. C'est ce qui garantit que ce que je propose à votre enfant a été évalué ailleurs que dans mon seul cabinet.</p>
+            <p class="a-completer" data-editable-zone="parcours_formations">Le détail de mes formations sera précisé ici.</p>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ========================== TEMOIGNAGES ========================= -->
+  <section id="temoignages">
+    <div class="wrap">
+      <div class="tete-section reveal">
+        <div class="brindille"></div>
+        <h2 data-editable-zone="temoignages_titre">Ce qu'en disent les familles</h2>
+        <p data-editable-zone="temoignages_intro">Les avis sont recueillis sur ma fiche Google. Si nous avons travaillé ensemble, en laisser un aide les familles qui hésitent encore — elles sont nombreuses à ne pas savoir vers qui se tourner.</p>
+      </div>
+
+      <!-- Trois emplacements, vides a la livraison. On n'invente pas de
+           temoignages : un faux avis sur un site d'accompagnement du
+           handicap est une faute, pas une facilite. Ils se remplissent
+           depuis l'espace client au fur et a mesure des vrais avis. -->
+      <div class="cartes">
+        <article class="carte reveal">
+          <div class="carte-txt">
+            <p class="temoin-texte a-completer" data-editable-zone="temoignage_1_texte">Premier témoignage à venir.</p>
+            <p class="temoin-nom" data-editable-zone="temoignage_1_nom">—</p>
+          </div>
+        </article>
+        <article class="carte reveal" data-retard="1">
+          <div class="carte-txt">
+            <p class="temoin-texte a-completer" data-editable-zone="temoignage_2_texte">Deuxième témoignage à venir.</p>
+            <p class="temoin-nom" data-editable-zone="temoignage_2_nom">—</p>
+          </div>
+        </article>
+        <article class="carte reveal" data-retard="2">
+          <div class="carte-txt">
+            <p class="temoin-texte a-completer" data-editable-zone="temoignage_3_texte">Troisième témoignage à venir.</p>
+            <p class="temoin-nom" data-editable-zone="temoignage_3_nom">—</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="reveal" style="margin-top:26px">
+        <a class="bt bt-nu" data-editable-zone="temoignages_lien" href="https://www.google.com/search?q=Sensi%27Dyf+Georgia+Gomez+B%C3%A9ziers" target="_blank" rel="noopener">Laisser un avis sur Google</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ TARIFS ============================ -->
+  <section id="tarifs">
+    <div class="wrap">
+      <div class="tete-section reveal">
+        <div class="brindille"></div>
+        <h2 data-editable-zone="tarifs_titre">Les tarifs</h2>
+        <p data-editable-zone="tarifs_intro">Affichés, parce qu'une famille qui hésite depuis des mois a le droit de savoir avant d'appeler. Le premier échange, lui, ne coûte rien.</p>
+      </div>
+
+      <div class="tarifs reveal">
+        <div class="tarif">
+          <div class="tarif-nom" data-editable-zone="tarif_1_nom">Séance de 30 minutes</div>
+          <div class="tarif-note" data-editable-zone="tarif_1_note">Le format des plus jeunes, ou de ceux pour qui une heure est trop longue.</div>
+          <div class="tarif-prix" data-editable-zone="tarif_1_prix">25 €</div>
+        </div>
+
+        <div class="tarif tarif-avant">
+          <div class="tarif-nom" data-editable-zone="tarif_2_nom">Séance d'une heure</div>
+          <div class="tarif-note" data-editable-zone="tarif_2_note">Tarif dégressif : une heure coûte moins que deux demi-heures.</div>
+          <div class="tarif-prix" data-editable-zone="tarif_2_prix">40 €</div>
+        </div>
+
+        <div class="tarif">
+          <div class="tarif-nom" data-editable-zone="tarif_3_nom">Bilan psychopédagogique</div>
+          <div class="tarif-note" data-editable-zone="tarif_3_note">Cognitif, éducatif, comportemental, émotionnel, apprentissages et fonctions exécutives.</div>
+          <div class="tarif-prix" data-editable-zone="tarif_3_prix">120 €</div>
+        </div>
+
+        <div class="tarif">
+          <div class="tarif-nom" data-editable-zone="tarif_4_nom">Appel découverte</div>
+          <div class="tarif-note" data-editable-zone="tarif_4_note">15 à 30 minutes pour me raconter la situation, sans engagement.</div>
+          <div class="tarif-prix tarif-gratuit" data-editable-zone="tarif_4_prix">Gratuit</div>
+        </div>
+      </div>
+
+      <p class="note-presta reveal" data-editable-zone="tarifs_note">Séances à domicile : des frais de déplacement s'ajoutent au tarif de la séance. Les tarifs des groupes d'habiletés sociales et des ateliers de langage seront précisés à leur ouverture, en novembre.</p>
     </div>
   </section>
 
@@ -655,9 +878,11 @@ footer a:hover { color: var(--vert) }
 
       <div class="encart reveal">
         <h3 data-editable-zone="financement_soustitre">La psychopédagogie n'est pas remboursée par l'Assurance maladie</h3>
-        <p data-editable-zone="financement_texte_1">C'est vrai pour toutes les professions d'accompagnement non conventionnées. Cela ne veut pas dire qu'aucune aide n'existe : selon la situation de votre enfant, <strong>l'AEEH</strong> et ses compléments, ou la <strong>PCH</strong>, peuvent contribuer au financement des séances. Certaines mutuelles participent également.</p>
+        <p data-editable-zone="financement_texte_1">Je ne suis pas conventionnée avec la CPAM, comme toutes les professions d'accompagnement de ce type. Cela ne veut pas dire qu'aucune aide n'existe : selon la situation de votre enfant, <strong>l'AEEH</strong> et ses compléments, ou la <strong>PCH</strong>, peuvent contribuer au financement des séances. Certaines mutuelles participent également.</p>
         <p data-editable-zone="financement_texte_2">Ces aides passent toutes par un <strong>dossier MDPH</strong>. C'est précisément l'une des choses sur lesquelles je vous accompagne : ce qu'il faut y écrire, comment le formuler, quelles pièces joindre.</p>
-        <p data-editable-zone="financement_texte_3">Les tarifs et les moyens de paiement acceptés vous sont communiqués avant le premier rendez-vous, sans engagement.</p>
+        <p data-editable-zone="financement_texte_3">Si vous employez une aide à domicile, je peux aussi intervenir dans le cadre du <strong>CESU</strong>, ou être employée directement par votre famille au titre de la PCH.</p>
+        <p data-editable-zone="financement_texte_4">Je fournis <strong>devis et factures</strong> : ce sont les pièces qu'on vous demandera pour toute demande de prise en charge.</p>
+        <p data-editable-zone="financement_texte_5">Tous les moyens de paiement sont acceptés, <strong>sauf la carte bancaire</strong>. Les tarifs vous sont communiqués avant le premier rendez-vous, sans engagement.</p>
       </div>
     </div>
   </section>
@@ -671,19 +896,19 @@ footer a:hover { color: var(--vert) }
         <p style="margin-top:18px;color:var(--plume)" data-editable-zone="contact_intro">Décrivez-moi la situation en quelques lignes : ce qui vous inquiète, ce qui a déjà été tenté, l'âge de votre enfant. Je vous rappelle pour un premier échange.</p>
 
         <div class="encart" style="margin-top:26px;border-left-color:var(--rose)">
-          <h3 data-editable-zone="appel_titre">L'appel découverte, 15 minutes</h3>
+          <h3 data-editable-zone="appel_titre">L'appel découverte, 15 à 30 minutes</h3>
           <p data-editable-zone="appel_texte_1">Gratuit et sans engagement. Vous me racontez la situation, je vous explique ce que je peux faire et comment cela se passerait.</p>
           <p data-editable-zone="appel_texte_2">Et si ce n'est pas moi qu'il vous faut, je vous le dis et je vous oriente vers la bonne personne. Un appel de quinze minutes n'engage rien — c'est bien pour ça qu'il existe.</p>
         </div>
 
         <div class="coord">
-          <a href="tel:+33600000000" data-editable-zone="contact_lien_tel">
+          <a href="tel:+33788282082" data-editable-zone="contact_lien_tel">
             <span aria-hidden="true">📞</span>
-            <span><b data-editable-zone="contact_telephone">06 00 00 00 00</b><small>Appeler</small></span>
+            <span><b data-editable-zone="contact_telephone">07 88 28 20 82</b><small>Appeler</small></span>
           </a>
-          <a href="sms:+33600000000" data-editable-zone="contact_lien_sms">
+          <a href="sms:+33788282082" data-editable-zone="contact_lien_sms">
             <span aria-hidden="true">💬</span>
-            <span><b>Envoyer un SMS</b><small>Si je suis en séance, je rappelle</small></span>
+            <span><b>Prendre rendez-vous par SMS</b><small>Je suis souvent en séance : le SMS est le plus sûr</small></span>
           </a>
           <a href="https://www.instagram.com/psychopeda_georgia_beziers/" target="_blank" rel="noopener">
             <span aria-hidden="true">📸</span>
@@ -728,8 +953,8 @@ footer a:hover { color: var(--vert) }
      bouton << Appeler >> ne mene nulle part, et une barre fixe y
      mange de la hauteur pour rien. -->
 <div class="barre-appel" aria-label="Contact rapide">
-  <a class="bt bt-nu" href="sms:+33600000000">💬 SMS</a>
-  <a class="bt bt-plein" href="tel:+33600000000">📞 Appeler</a>
+  <a class="bt bt-nu" href="sms:+33788282082">💬 SMS</a>
+  <a class="bt bt-plein" href="tel:+33788282082">📞 Appeler</a>
 </div>
 
 <footer>
