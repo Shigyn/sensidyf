@@ -50,6 +50,14 @@
 
     if (href.indexOf('tel:') === 0) {
       envoyer('appel_telephone', { numero: href.slice(4) });
+    } else if (href.indexOf('sms:') === 0) {
+      /* Le SMS compte autant que l'appel, et parfois plus : un
+         artisan sur un chantier, une praticienne en seance, ne
+         decrochent pas — ils lisent. Sans cette ligne le bouton
+         marche mais n'apparait nulle part dans le tableau de
+         bord, et on annonce << 0 demande >> a quelqu'un qui a
+         recu dix messages. */
+      envoyer('envoi_sms', { numero: href.slice(4).split('?')[0] });
     } else if (href.indexOf('mailto:') === 0) {
       envoyer('clic_email');
     } else if (/google\.[a-z.]+\/maps|maps\.app\.goo\.gl|waze\.com/.test(href)) {

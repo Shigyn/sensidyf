@@ -372,6 +372,28 @@ textarea { min-height: 140px; resize: vertical }
 .statut { font-size: 15px; color: var(--vert-mid); min-height: 1.4em }
 .statut[data-erreur] { color: #A6362F }
 
+/* --- La barre d'appel (mobile) ------------------------------------
+   Elle ne s'affiche que sous 920 px. Deux raisons, pas une :
+   sur un ordinateur `tel:` ne mene generalement nulle part, et une
+   barre fixe y prendrait de la hauteur sans rien apporter.
+
+   Le `padding-bottom` sur le body n'est pas un detail : sans lui,
+   la barre recouvre la derniere ligne du pied de page, et c'est
+   exactement la que se trouve la mention LocWeb. */
+.barre-appel { display: none }
+@media (max-width: 920px) {
+  .barre-appel {
+    display: flex; gap: 10px; position: fixed; z-index: 45;
+    left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom));
+    padding: 10px; border-radius: 999px;
+    background: rgba(246,242,235,.92); backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--greige); box-shadow: 0 12px 34px rgba(56,82,74,.18);
+  }
+  .barre-appel .bt { flex: 1; min-height: 48px; padding: 0 14px; font-size: 15px }
+  .barre-appel .bt-nu { background: #fff }
+  body { padding-bottom: 92px }
+}
+
 /* --- Pied ------------------------------------------------------------------- */
 footer { border-top: 1px solid var(--greige); padding: 42px 0 48px; color: var(--plume); font-size: 14.5px }
 .pied-grille { display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center }
@@ -649,6 +671,14 @@ footer a:hover { color: var(--vert) }
         <p style="margin-top:18px;color:var(--plume)" data-editable-zone="contact_intro">Décrivez-moi la situation en quelques lignes : ce qui vous inquiète, ce qui a déjà été tenté, l'âge de votre enfant. Je vous réponds et nous voyons ensemble si je suis la bonne personne.</p>
 
         <div class="coord">
+          <a href="tel:+33600000000" data-editable-zone="contact_lien_tel">
+            <span aria-hidden="true">📞</span>
+            <span><b data-editable-zone="contact_telephone">06 00 00 00 00</b><small>Appeler</small></span>
+          </a>
+          <a href="sms:+33600000000" data-editable-zone="contact_lien_sms">
+            <span aria-hidden="true">💬</span>
+            <span><b>Envoyer un SMS</b><small>Si je suis en séance, je rappelle</small></span>
+          </a>
           <a href="https://www.instagram.com/psychopeda_georgia_beziers/" target="_blank" rel="noopener">
             <span aria-hidden="true">📸</span>
             <span><b>@psychopeda_georgia_beziers</b><small>Conseils et actualités sur Instagram</small></span>
@@ -657,7 +687,7 @@ footer a:hover { color: var(--vert) }
             <span aria-hidden="true">📘</span>
             <span><b>Psychopédagogue Gomez Georgia</b><small>La page Facebook</small></span>
           </a>
-          <a href="https://maps.google.com/?q=5+rue+de+la+Brasserie+34500+B%C3%A9ziers" target="_blank" rel="noopener">
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=5+rue+de+la+Brasserie+34500+B%C3%A9ziers" target="_blank" rel="noopener">
             <span aria-hidden="true">📍</span>
             <span><b data-editable-zone="contact_adresse">5 rue de la Brasserie, Béziers</b><small>Itinéraire</small></span>
           </a>
@@ -687,6 +717,14 @@ footer a:hover { color: var(--vert) }
   </section>
 
 </main>
+
+<!-- La barre d'appel. MOBILE UNIQUEMENT : sur un ordinateur un
+     bouton << Appeler >> ne mene nulle part, et une barre fixe y
+     mange de la hauteur pour rien. -->
+<div class="barre-appel" aria-label="Contact rapide">
+  <a class="bt bt-nu" href="sms:+33600000000">💬 SMS</a>
+  <a class="bt bt-plein" href="tel:+33600000000">📞 Appeler</a>
+</div>
 
 <footer>
   <div class="wrap pied-grille">
