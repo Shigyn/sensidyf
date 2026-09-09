@@ -286,12 +286,24 @@ section { padding: var(--rythme) 0 }
 /* `fixed` est ignore ou saccade sur iOS : repli en `scroll` des qu'il
    n'y a pas de vrai survol. */
 @media (hover: none), (max-width: 920px) { .bande { background-attachment: scroll } }
+/* La bande est un conteneur flex : sans cette largeur, son .wrap se
+   reduit a son contenu puis se recentre tout seul (marges auto), et
+   le texte demarrait a 378 px quand toutes les autres sections
+   demarrent a 43. Les trois bandes etaient les seuls blocs de la
+   page hors grille — et le degrade, plus fort a GAUCHE, etait
+   dessine pour un texte cale a gauche. */
+.bande > .wrap { width: 100% }
 .bande-sombre::before {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(90deg, rgba(28,40,36,.9) 0%, rgba(28,40,36,.62) 56%, rgba(28,40,36,.3) 100%);
 }
 .bande-sombre .bande-txt { color: rgba(255,255,255,.94) }
 .bande-sombre .bande-txt h2 { color: #fff }
+.bande-plateau::before {
+  background: linear-gradient(90deg,
+    rgba(28,40,36,.90) 0%, rgba(28,40,36,.74) 38%,
+    rgba(28,40,36,.68) 74%, rgba(28,40,36,.22) 100%);
+}
 .bande-claire::before {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(90deg, rgba(246,242,235,.95) 0%, rgba(246,242,235,.78) 56%, rgba(246,242,235,.32) 100%);
@@ -368,8 +380,22 @@ section { padding: var(--rythme) 0 }
 }
 
 /* --- Temoignages ----------------------------------------------------- */
-.temoin-texte { color: var(--encre); font-size: 15.5px; font-style: italic }
-.temoin-nom { margin-top: 12px; font-size: 13.5px; font-weight: 600; color: var(--dore-txt) }
+.carte .temoin-texte { color: var(--encre); font-size: 15.5px; font-style: italic }
+.carte .temoin-nom { margin-top: 14px; font-size: 14.5px; font-weight: 700; color: var(--vert) }
+/* Les etoiles portent la note : version FONCEE du dore (4,9:1 sur
+   blanc), pas la version decorative. */
+.temoin-etoiles {
+  color: var(--dore-txt); font-size: 15px; letter-spacing: .22em;
+  margin-bottom: 14px;
+}
+.carte .temoin-src { margin-top: 2px; font-size: 13px; color: var(--plume) }
+.carte-avis { border-left: 3px solid var(--rose-pale) }
+/* La derniere carte n'est pas un avis : fond sable pour qu'on ne
+   la compte pas dans le nombre d'avis d'un coup d'oeil. */
+.carte-appel { background: var(--sable) }
+.carte-appel .carte-txt { display: flex; flex-direction: column; align-items: flex-start; height: 100% }
+.carte-appel .bt { margin-top: auto; padding-top: 0 }
+.carte-appel p { margin-bottom: 20px; color: var(--vert) }
 /* Ce qui attend un contenu reel. Visible sans etre criard : il faut
    qu'on le remarque en relisant, et qu'on ne puisse pas le publier
    sans s'en apercevoir. */
@@ -409,14 +435,26 @@ section { padding: var(--rythme) 0 }
 /* --- Contact --------------------------------------------------------------- */
 .contact-grille { display: grid; gap: clamp(32px, 4.5vw, 58px); grid-template-columns: 1fr }
 @media (min-width: 920px) { .contact-grille { grid-template-columns: .92fr 1.08fr } }
-.coord { display: grid; gap: 14px; margin-top: 28px }
+.coord {
+  display: grid; gap: 14px; margin-top: clamp(32px, 4vw, 48px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  align-items: stretch;
+}
 /* Bordure a 3:1 : ce sont des commandes, pas des cartes. */
 .coord a {
   display: flex; align-items: center; gap: 14px; text-decoration: none;
   padding: 16px 19px; border: 1px solid var(--vert-mid); border-radius: var(--r);
   background: #fff; transition: border-color .25s ease, transform .25s var(--ease);
 }
-.coord a:hover { border-color: var(--vert); transform: translateX(4px) }
+/* Cinq tuiles sur trois colonnes laissent un trou. Le numero prend
+   deux colonnes : la grille se remplit, et c'est aussi la seule
+   tuile qui merite plus de place — sur un site comme celui-ci,
+   appuyer sur le numero est l'action qui compte. */
+/* Uniquement quand deux colonnes tiennent vraiment : sur auto-fit,
+   un `span 2` FORCE deux pistes meme s'il n'y a pas la place, et la
+   page debordait de 287 px sur un telephone. */
+@media (min-width: 760px) { .coord a:first-child { grid-column: span 2 } }
+.coord a:hover { border-color: var(--vert); transform: translateY(-3px) }
 .coord a:focus-visible { outline: 3px solid var(--dore-txt); outline-offset: 3px }
 .coord b { font-family: var(--disp); font-size: 17px; display: block; color: var(--vert) }
 .coord small { color: var(--plume); font-size: 13.5px }
@@ -795,39 +833,54 @@ footer a:hover { color: var(--vert) }
       <div class="tete-section reveal">
         <div class="brindille"></div>
         <h2 data-editable-zone="temoignages_titre">Ce qu'en disent les familles</h2>
-        <p data-editable-zone="temoignages_intro">Les avis sont recueillis sur ma fiche Google. Si nous avons travaillé ensemble, en laisser un aide les familles qui hésitent encore — elles sont nombreuses à ne pas savoir vers qui se tourner.</p>
+        <p data-editable-zone="temoignages_intro">Ces avis viennent de ma <a href="https://share.google/Vond6lzsNDip8RVaA" target="_blank" rel="noopener">fiche Google</a>, où ils sont publics et vérifiables. Ils y sont notés 5 sur 5.</p>
       </div>
 
-      <!-- Trois emplacements, vides a la livraison. On n'invente pas de
-           temoignages : un faux avis sur un site d'accompagnement du
-           handicap est une faute, pas une facilite. Ils se remplissent
-           depuis l'espace client au fur et a mesure des vrais avis. -->
+      <!-- Les deux avis de sa fiche Google, releves le 2026-09-09.
+           Recopies MOT POUR MOT, y compris les tournures de leurs
+           auteurs : un temoignage retouche n'est plus un temoignage.
+           La troisieme carte n'est pas un avis mais l'invitation a en
+           laisser un — un emplacement vide marque << a venir >> fait
+           plus de mal que deux avis bien presentes. -->
       <div class="cartes">
-        <article class="carte reveal">
+        <article class="carte carte-avis reveal">
           <div class="carte-txt">
-            <p class="temoin-texte a-completer" data-editable-zone="temoignage_1_texte">Premier témoignage à venir.</p>
-            <p class="temoin-nom" data-editable-zone="temoignage_1_nom">—</p>
+            <div class="temoin-etoiles" role="img" aria-label="Noté 5 sur 5">★★★★★</div>
+            <p class="temoin-texte" data-editable-zone="temoignage_1_texte">Cabinet de psychopédagogie sérieux à Béziers. L’approche est bienveillante et centrée sur les besoins de l’enfant. Le cadre est calme et rassurant, ce qui aide les enfants à se sentir rapidement en confiance. Une professionnelle attentive et investie dans son accompagnement.</p>
+            <p class="temoin-nom" data-editable-zone="temoignage_1_nom">Juliette Cavaille</p>
+            <p class="temoin-src" data-editable-zone="temoignage_1_source">Avis Google</p>
           </div>
         </article>
-        <article class="carte reveal" data-retard="1">
+        <article class="carte carte-avis reveal" data-retard="1">
           <div class="carte-txt">
-            <p class="temoin-texte a-completer" data-editable-zone="temoignage_2_texte">Deuxième témoignage à venir.</p>
-            <p class="temoin-nom" data-editable-zone="temoignage_2_nom">—</p>
+            <div class="temoin-etoiles" role="img" aria-label="Noté 5 sur 5">★★★★★</div>
+            <p class="temoin-texte" data-editable-zone="temoignage_2_texte">Une professionnelle impliquée, qui cherche des aménagements suivants les enfants et les résultats sont plus que satisfaisant je recommande vivement.</p>
+            <p class="temoin-nom" data-editable-zone="temoignage_2_nom">Frédéric T.</p>
+            <p class="temoin-src" data-editable-zone="temoignage_2_source">Avis Google</p>
           </div>
         </article>
-        <article class="carte reveal" data-retard="2">
+        <article class="carte carte-appel reveal" data-retard="2">
           <div class="carte-txt">
-            <p class="temoin-texte a-completer" data-editable-zone="temoignage_3_texte">Troisième témoignage à venir.</p>
-            <p class="temoin-nom" data-editable-zone="temoignage_3_nom">—</p>
+            <h3 data-editable-zone="temoignages_appel_titre">Nous avons travaillé ensemble&nbsp;?</h3>
+            <p data-editable-zone="temoignages_appel_texte">Quelques lignes sur votre expérience, et une famille qui hésite depuis des mois saura enfin vers qui se tourner.</p>
+            <a class="bt bt-nu" data-editable-zone="temoignages_lien" href="https://share.google/Vond6lzsNDip8RVaA" target="_blank" rel="noopener">Laisser un avis</a>
           </div>
         </article>
-      </div>
-
-      <div class="reveal" style="margin-top:26px">
-        <a class="bt bt-nu" data-editable-zone="temoignages_lien" href="https://www.google.com/search?q=Sensi%27Dyf+Georgia+Gomez+B%C3%A9ziers" target="_blank" rel="noopener">Laisser un avis sur Google</a>
       </div>
     </div>
   </section>
+
+  <!-- Respiration avant les prix. La moitie gauche de la photo est
+       sombre (luminance moyenne mesuree a 49/255) : voile vert et
+       texte clair, comme la bande de la salle sensorielle. -->
+  <div class="bande bande-sombre bande-plateau" style="background-image:url('photos/premier-pas-1600.webp')">
+    <div class="wrap">
+      <div class="bande-txt reveal">
+        <h2 data-editable-zone="bande_tarifs_titre">Le plus dur, c’est d’oser demander</h2>
+        <p data-editable-zone="bande_tarifs_texte">Beaucoup de familles attendent des mois avant de décrocher leur téléphone, faute de savoir ce que ça coûte et si elles en ont les moyens. C’est pour ça que les tarifs sont écrits ici, en clair — et que le premier échange, lui, ne coûte rien.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- ============================ TARIFS ============================ -->
   <section id="tarifs">
@@ -889,7 +942,8 @@ footer a:hover { color: var(--vert) }
 
   <!-- ========================== CONTACT ============================ -->
   <section id="contact">
-    <div class="wrap contact-grille">
+    <div class="wrap">
+     <div class="contact-grille">
       <div class="reveal">
         <div class="brindille"></div>
         <h2 style="font-size:clamp(30px,4.4vw,48px);letter-spacing:-.02em;color:var(--vert)" data-editable-zone="contact_titre">Parlons de votre enfant</h2>
@@ -901,7 +955,30 @@ footer a:hover { color: var(--vert) }
           <p data-editable-zone="appel_texte_2">Et si ce n'est pas moi qu'il vous faut, je vous le dis et je vous oriente vers la bonne personne. Un appel de quinze minutes n'engage rien — c'est bien pour ça qu'il existe.</p>
         </div>
 
-        <div class="coord">
+      </div>
+
+      <div class="reveal" data-retard="2">
+        <form id="form-contact" novalidate>
+          <label>Votre nom
+            <input type="text" name="nom" autocomplete="name" required>
+          </label>
+          <label>Votre téléphone
+            <input type="tel" name="telephone" autocomplete="tel" required>
+          </label>
+          <label>Votre email
+            <input type="email" name="email" autocomplete="email">
+          </label>
+          <label>Ce qui vous amène
+            <textarea name="message" placeholder="L'âge de votre enfant, ce qui vous inquiète, ce qui a déjà été mis en place, et vos disponibilités pour l'appel…"></textarea>
+          </label>
+          <div class="pot"><label>Ne pas remplir<input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
+          <button type="submit" class="bt bt-plein" style="width:100%" data-editable-zone="contact_bouton">Demander mon appel gratuit</button>
+          <p class="statut" id="statut-contact" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+     </div>
+
+        <div class="coord reveal">
           <a href="tel:+33788282082" data-editable-zone="contact_lien_tel">
             <span aria-hidden="true">📞</span>
             <span><b data-editable-zone="contact_telephone">07 88 28 20 82</b><small>Appeler</small></span>
@@ -923,26 +1000,6 @@ footer a:hover { color: var(--vert) }
             <span><b data-editable-zone="contact_adresse">5 rue de la Brasserie, Béziers</b><small>Itinéraire</small></span>
           </a>
         </div>
-      </div>
-
-      <div class="reveal" data-retard="2">
-        <form id="form-contact" novalidate>
-          <label>Votre nom
-            <input type="text" name="nom" autocomplete="name" required>
-          </label>
-          <label>Votre téléphone
-            <input type="tel" name="telephone" autocomplete="tel" required>
-          </label>
-          <label>Votre email
-            <input type="email" name="email" autocomplete="email">
-          </label>
-          <label>Ce qui vous amène
-            <textarea name="message" placeholder="L'âge de votre enfant, ce qui vous inquiète, ce qui a déjà été mis en place, et vos disponibilités pour l'appel…"></textarea>
-          </label>
-          <div class="pot"><label>Ne pas remplir<input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
-          <button type="submit" class="bt bt-plein" style="width:100%" data-editable-zone="contact_bouton">Demander mon appel gratuit</button>
-          <p class="statut" id="statut-contact" role="status" aria-live="polite"></p>
-        </form>
       </div>
     </div>
   </section>
