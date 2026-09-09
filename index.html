@@ -460,7 +460,7 @@ footer a:hover { color: var(--vert) }
         </div>
 
         <div class="hero-actions reveal" data-vu data-retard="4">
-          <a class="bt bt-plein" href="#contact">Prendre contact</a>
+          <a class="bt bt-plein" href="#contact" data-editable-zone="hero_cta">Appel découverte · 15 min</a>
           <a class="bt bt-nu" href="#accompagnements">Voir les accompagnements</a>
         </div>
       </div>
@@ -668,7 +668,13 @@ footer a:hover { color: var(--vert) }
       <div class="reveal">
         <div class="brindille"></div>
         <h2 style="font-size:clamp(30px,4.4vw,48px);letter-spacing:-.02em;color:var(--vert)" data-editable-zone="contact_titre">Parlons de votre enfant</h2>
-        <p style="margin-top:18px;color:var(--plume)" data-editable-zone="contact_intro">Décrivez-moi la situation en quelques lignes : ce qui vous inquiète, ce qui a déjà été tenté, l'âge de votre enfant. Je vous réponds et nous voyons ensemble si je suis la bonne personne.</p>
+        <p style="margin-top:18px;color:var(--plume)" data-editable-zone="contact_intro">Décrivez-moi la situation en quelques lignes : ce qui vous inquiète, ce qui a déjà été tenté, l'âge de votre enfant. Je vous rappelle pour un premier échange.</p>
+
+        <div class="encart" style="margin-top:26px;border-left-color:var(--rose)">
+          <h3 data-editable-zone="appel_titre">L'appel découverte, 15 minutes</h3>
+          <p data-editable-zone="appel_texte_1">Gratuit et sans engagement. Vous me racontez la situation, je vous explique ce que je peux faire et comment cela se passerait.</p>
+          <p data-editable-zone="appel_texte_2">Et si ce n'est pas moi qu'il vous faut, je vous le dis et je vous oriente vers la bonne personne. Un appel de quinze minutes n'engage rien — c'est bien pour ça qu'il existe.</p>
+        </div>
 
         <div class="coord">
           <a href="tel:+33600000000" data-editable-zone="contact_lien_tel">
@@ -706,10 +712,10 @@ footer a:hover { color: var(--vert) }
             <input type="email" name="email" autocomplete="email">
           </label>
           <label>Ce qui vous amène
-            <textarea name="message" placeholder="L'âge de votre enfant, ce qui vous inquiète, ce qui a déjà été mis en place…"></textarea>
+            <textarea name="message" placeholder="L'âge de votre enfant, ce qui vous inquiète, ce qui a déjà été mis en place, et vos disponibilités pour l'appel…"></textarea>
           </label>
           <div class="pot"><label>Ne pas remplir<input type="text" name="site" tabindex="-1" autocomplete="off"></label></div>
-          <button type="submit" class="bt bt-plein" style="width:100%">Envoyer ma demande</button>
+          <button type="submit" class="bt bt-plein" style="width:100%" data-editable-zone="contact_bouton">Demander mon appel de 15 min</button>
           <p class="statut" id="statut-contact" role="status" aria-live="polite"></p>
         </form>
       </div>
