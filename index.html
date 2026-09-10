@@ -398,6 +398,137 @@ section { padding: var(--rythme) 0 }
   .tarif-prix { grid-row: auto; grid-column: 1; margin-top: 6px }
 }
 
+/* --- La galerie -----------------------------------------------------
+   Ses photos, en vrac, comme elle le demande : le materiel reel, les
+   coins de travail, l'enseigne. Le site n'avait jusqu'ici que des
+   images d'illustration achetees ailleurs — c'est-a-dire le cabinet de
+   quelqu'un d'autre.
+
+   AUCUNE PERSONNE N'Y FIGURE, et ce n'est pas un choix esthetique. La
+   detection automatique de visages rate les profils et les
+   trois-quarts ; sur un site d'accompagnement d'enfants en situation
+   de handicap, un visage manque n'est pas un defaut d'affichage, c'est
+   un enfant identifiable publie sans autorisation. Les photos
+   retenues sont donc celles ou il n'y a personne, verifiees une par
+   une. Deux ont ete ecartees pour cette seule raison.
+
+   Grille en carres : ces photos viennent d'un telephone, en portrait
+   comme en paysage. Les mettre au carre est la seule facon d'obtenir
+   une planche qui tienne debout. */
+.galerie {
+  display: grid; gap: 12px; margin-top: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+}
+.galerie figure { position: relative; margin: 0; overflow: hidden; border-radius: var(--r) }
+.galerie img {
+  display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover;
+  transition: transform .5s var(--ease);
+}
+.galerie figure:hover img { transform: scale(1.05) }
+/* La legende ne s'affiche qu'au survol sur grand ecran : sur une
+   planche de quatorze images, quatorze bandeaux permanents font une
+   page de texte. Elle reste dans l'`alt` pour qui ne survole pas. */
+.galerie figcaption {
+  position: absolute; inset: auto 0 0 0; padding: 10px 12px;
+  font-size: 12.5px; color: #fff; line-height: 1.35;
+  background: linear-gradient(transparent, rgba(28,40,36,.82) 55%);
+  opacity: 0; transition: opacity .3s ease;
+}
+.galerie figure:hover figcaption, .galerie figure:focus-within figcaption { opacity: 1 }
+@media (hover: none) { .galerie figcaption { display: none } }
+
+/* --- Les formations -------------------------------------------------
+   Ce bloc portait un << Le detail de mes formations sera precise ici >>
+   marque en attente depuis la mise en ligne : je refusais d'inventer
+   des diplomes. Elle a fini par tout ecrire elle-meme, et c'est repris
+   MOT POUR MOT — aucun intitule traduit, aucun niveau ajoute, aucune
+   ecole invente.
+
+   Cinq familles, chacune avec sa liste. Le point median separe les
+   items comme elle les a ecrits. */
+.formations { display: grid; gap: 20px; margin-top: 22px }
+.formation h4 {
+  font-family: var(--disp); font-size: 17px; font-weight: 600;
+  color: var(--vert); margin-bottom: 6px;
+}
+.formation p { color: var(--plume); font-size: 15.4px; line-height: 1.62 }
+/* La formation en cours n'est pas acquise : elle se distingue, sans
+   qu'on ait a lire pour s'en rendre compte. */
+.formation-encours {
+  border-left: 2px solid var(--rose); padding-left: 14px;
+}
+.formation-encours h4 { color: var(--dore-txt) }
+
+/* --- La CAA ---------------------------------------------------------
+   Georgia : << elle doit devenir une vraie grande section >>. Elle
+   tenait jusqu'ici en quelques lignes dans la liste des prestations,
+   ce qu'elle jugeait << clairement pas suffisant >> pour ce qui est au
+   coeur de sa pratique.
+
+   Deux colonnes : le texte a gauche, la photo de son tableau de
+   langage a droite. C'est la seule section du site ou une capture
+   d'ecran vaut mieux qu'une photo d'ambiance — on voit exactement ce
+   dont on parle. */
+.caa { background: linear-gradient(180deg, #fff 0%, var(--creme) 100%) }
+.caa-grille { display: grid; gap: clamp(28px, 4vw, 52px); grid-template-columns: 1fr; align-items: center }
+@media (min-width: 940px) { .caa-grille { grid-template-columns: 1.05fr .95fr } }
+.caa-photo {
+  border-radius: var(--r); overflow: hidden;
+  box-shadow: 0 26px 60px rgba(56,82,74,.16);
+  border: 1px solid var(--greige);
+}
+.caa-photo img { display: block; width: 100%; height: auto }
+.caa-grille p + p { margin-top: 16px }
+.caa-liste { display: grid; gap: 10px; margin-top: 22px; padding: 0; list-style: none }
+.caa-liste li {
+  position: relative; padding-left: 26px; color: var(--plume); font-size: 15.8px;
+}
+.caa-liste li::before {
+  content: ''; position: absolute; left: 0; top: .55em;
+  width: 9px; height: 9px; border-radius: 50%; background: var(--rose);
+}
+
+/* La phrase qu'elle a demandee visuellement isolee. Elle l'appelle sa
+   << phrase signature >> : on ne la noie donc pas dans un paragraphe.
+   Pas de guillemets dessines — le retrait, la taille et l'italique
+   suffisent, et des guillemets en feraient une citation d'un tiers
+   alors que ce sont ses mots. */
+.signature {
+  margin: clamp(46px, 6vw, 76px) auto 0; max-width: 22em; text-align: center;
+}
+.signature p {
+  font-family: var(--disp); font-style: italic; font-weight: 400;
+  font-size: clamp(23px, 3.4vw, 33px); line-height: 1.34; color: var(--vert);
+}
+.signature .brindille { margin: 0 auto 22px }
+
+/* --- Le bouton WhatsApp ---------------------------------------------
+   Demande par Georgia : elle privilegie l'ecrit avant l'appel
+   decouverte, et dit elle-meme n'etre << pas tres assidue >> sur ses
+   mails. Le WhatsApp devient donc le chemin le plus court entre un
+   parent qui hesite et elle.
+
+   Il est au VERT DE WHATSAPP et non a la palette du site. C'est
+   volontaire et c'est la seule entorse : cette couleur est un
+   panneau de signalisation, on la reconnait sans lire. La repeindre
+   en rose poudre ferait joli et ne serait plus reconnue.
+
+   Il s'efface derriere la barre d'appel du telephone, qui occupe deja
+   le bas de l'ecran : deux boutons flottants superposes, c'est deux
+   fois aucun. */
+.wa {
+  position: fixed; right: 18px; bottom: 18px; z-index: 60;
+  width: 58px; height: 58px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: #25D366; color: #fff; text-decoration: none;
+  box-shadow: 0 10px 28px rgba(37,211,102,.34), 0 2px 8px rgba(0,0,0,.18);
+  transition: transform .2s var(--ease), box-shadow .2s ease;
+}
+.wa:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(37,211,102,.42) }
+.wa:focus-visible { outline: 3px solid var(--vert); outline-offset: 4px }
+.wa svg { width: 30px; height: 30px; fill: #fff }
+@media (max-width: 760px) { .wa { display: none } }
+
 /* --- Temoignages ----------------------------------------------------- */
 .carte .temoin-texte { color: var(--encre); font-size: 15.5px; font-style: italic }
 .carte .temoin-nom { margin-top: 14px; font-size: 14.5px; font-weight: 700; color: var(--vert) }
@@ -552,6 +683,8 @@ footer a:hover { color: var(--vert) }
     </a>
     <nav>
       <a href="#accompagnements">Accompagnements</a>
+      <a href="#caa">La CAA</a>
+      <a href="#galerie">Le cabinet</a>
       <a href="#parcours">Qui je suis</a>
       <a href="#tarifs">Tarifs</a>
       <a href="#temoignages">Témoignages</a>
@@ -580,7 +713,7 @@ footer a:hover { color: var(--vert) }
         <p class="hero-accroche reveal" data-vu data-retard="2" data-editable-zone="hero_accroche">J'accompagne les enfants et les adolescents pour qui le langage, les apprentissages et le quotidien sont difficiles. Communication, comportement, sensorialité, école : on cherche ensemble ce qui va leur permettre d'être compris.</p>
 
         <div class="publics reveal" data-vu data-retard="3" data-editable-zone="hero_publics">
-          <span>TSA</span><span>T21</span><span>TDL</span><span>DYS</span><span>TDA(H)</span><span>Déficience intellectuelle</span><span>Syndromes génétiques</span>
+          <span>TSA</span><span>T21</span><span>TDL</span><span>DYS</span><span>TDA(H)</span><span>Déficience intellectuelle</span><span>Syndromes génétiques</span><span>Handicap moteur</span><span>Polyhandicap</span>
         </div>
 
         <div class="hero-actions reveal" data-vu data-retard="4">
@@ -698,7 +831,7 @@ footer a:hover { color: var(--vert) }
           <div class="carte-txt">
             <span class="sigle">Parcours</span>
             <h3>Référente de parcours éducatif</h3>
-            <p data-editable-zone="service_parcours">Je peux tenir le fil entre l'école, les professionnels de santé, les structures et la famille : celui qui connaît l'enfant dans son ensemble et fait le lien entre des interlocuteurs qui, souvent, ne se parlent pas.</p>
+            <p data-editable-zone="service_parcours">Quand plusieurs personnes accompagnent un enfant, il est parfois difficile pour une famille de savoir qui fait quoi. Je propose d’être <strong>un fil conducteur</strong> autour de l’enfant et de sa famille : entretiens réguliers, plan d’accompagnement aux objectifs concrets, et lien — avec votre accord — entre les parents, l’école, les professionnels et les structures.</p>
           </div>
         </article>
 
@@ -759,6 +892,93 @@ footer a:hover { color: var(--vert) }
   </section>
 
   <!-- ================= AU CABINET OU A DOMICILE ===================== -->
+  <!-- ========================== LA CAA ============================
+       Ses mots, presque sans retouche : elle a redige cette section
+       elle-meme et demande qu'elle prenne toute sa place. -->
+  <section class="caa" id="caa">
+    <div class="wrap">
+      <div class="tete-section reveal">
+        <div class="brindille"></div>
+        <p class="surtitre" data-editable-zone="caa_surtitre">Communiquer autrement</p>
+        <h2 data-editable-zone="caa_titre">La CAA</h2>
+        <p data-editable-zone="caa_intro">Avant de chercher à faire parler un enfant, donnons-lui les moyens de communiquer.</p>
+      </div>
+
+      <div class="caa-grille">
+        <div class="reveal">
+          <p data-editable-zone="caa_texte_1">La <strong>Communication Alternative et Améliorée</strong> est au cœur de ma pratique. Communiquer, ce n’est pas uniquement prononcer des mots. C’est pouvoir demander, refuser, choisir, raconter, partager une émotion, poser une question, entrer en relation… et être entendu.</p>
+          <p data-editable-zone="caa_texte_2">Lorsqu’un enfant ne parle pas, parle peu, ou que sa parole ne lui permet pas d’exprimer tout ce qu’il souhaite, nous recherchons ensemble le moyen de communication qui lui correspond.</p>
+
+          <p style="margin-top:20px" data-editable-zone="caa_supports_titre"><strong>Selon ses besoins, ses capacités et son environnement :</strong></p>
+          <ul class="caa-liste">
+            <li data-editable-zone="caa_outil_1">Pictogrammes, gestes et signes issus de la LSF</li>
+            <li data-editable-zone="caa_outil_2">Supports visuels et PECS</li>
+            <li data-editable-zone="caa_outil_3">Tableaux de langage assisté</li>
+            <li data-editable-zone="caa_outil_4">Outils numériques : TD Snap, Proloquo2Go, Grid</li>
+          </ul>
+
+          <p data-editable-zone="caa_texte_3" style="margin-top:22px">Quand nous nous orientons vers un outil numérique, je privilégie des systèmes robustes et personnalisables, capables d’évoluer avec l’enfant. Le vocabulaire, l’organisation et les accès s’adaptent progressivement aux situations qu’il rencontre réellement dans son quotidien.</p>
+        </div>
+
+        <div class="caa-photo reveal" data-retard="1">
+          <img data-editable-zone="caa_photo" src="photos/caa-800.webp"
+               srcset="photos/caa-800.webp 800w, photos/caa-1600.webp 1600w"
+               sizes="(min-width:940px) 460px, 100vw"
+               alt="Un tableau de langage assisté sur tablette, avec les pictogrammes « vouloir », « pas », « aimer » et « encore »"
+               width="2360" height="1640" loading="lazy" decoding="async">
+        </div>
+      </div>
+
+      <div class="encart reveal" style="margin-top:34px">
+        <h3 data-editable-zone="caa_relation_titre">La communication se construit dans la relation</h3>
+        <p data-editable-zone="caa_relation_1">Mettre un outil entre les mains d’un enfant ne suffit pas. Les parents occupent donc une place essentielle : je leur montre comment utiliser et modéliser la CAA afin qu’elle trouve progressivement sa place dans les jeux, les repas, les sorties, l’école et tous les petits moments de la vie.</p>
+        <p data-editable-zone="caa_relation_2">Lorsque cela est possible, le travail est aussi partagé avec les autres personnes qui entourent l’enfant, afin qu’il retrouve le même langage et les mêmes possibilités de communication dans ses différents lieux de vie.</p>
+        <p data-editable-zone="caa_relation_3"><strong>Aucun prérequis n’est nécessaire pour accéder à la CAA.</strong></p>
+      </div>
+
+      <div class="encart reveal" data-retard="1" style="margin-top:18px;border-left-color:var(--rose)">
+        <h3 data-editable-zone="caa_ecoles_titre">Écoles, structures, professionnels</h3>
+        <p data-editable-zone="caa_ecoles_texte">Je souhaite voir la CAA s’implanter dans le Biterrois, dans les écoles et partout où vivent ces enfants. Je reste disponible pour accompagner sa <strong>mise en place</strong> ou assurer une <strong>formation</strong> auprès des équipes qui en ont besoin.</p>
+      </div>
+
+      <div class="signature reveal">
+        <div class="brindille"></div>
+        <p data-editable-zone="signature">Gardienne des maux, passeuse vers les mots.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SENSORIALITE ET REGULATION ===================
+       Sa section 4, ecrite par elle. Le cabinet a une piece pensee
+       pour les sens : elle n'apparaissait nulle part, alors que c'est
+       une bonne partie de ce qui distingue son lieu. -->
+  <section id="sensorialite">
+    <div class="wrap">
+      <div class="tete-section reveal">
+        <div class="brindille"></div>
+        <p class="surtitre" data-editable-zone="sens_surtitre">Un espace pensé pour les sens</p>
+        <h2 data-editable-zone="sens_titre">Sensorialité et régulation</h2>
+        <p data-editable-zone="sens_intro">Certains enfants ont besoin de bouger pour se rendre disponibles. D’autres ont besoin de ralentir, de diminuer les stimulations ou de retrouver des sensations qui les sécurisent.</p>
+      </div>
+
+      <div class="caa-grille">
+        <div class="reveal">
+          <p data-editable-zone="sens_texte_1">Le cabinet dispose de différents matériels permettant d’adapter l’environnement aux particularités sensorielles de l’enfant : matériel vestibulaire et proprioceptif, textures, supports visuels, matériel de motricité et différents outils de régulation.</p>
+          <p data-editable-zone="sens_texte_2">Dans ma pratique, ces principes viennent s’intégrer à une approche globale de l’enfant : observer, comprendre, ajuster — lui permettre d’être disponible, en sécurité, et acteur de ce qui lui est proposé, selon l’<strong>approche snoezelen</strong>.</p>
+          <p data-editable-zone="sens_texte_3">Ce travail rejoint celui que je mène autour du <strong>système nerveux</strong> : co-régulation et autorégulation, pour qu’un enfant débordé retrouve un état où il peut de nouveau apprendre et entrer en relation.</p>
+        </div>
+
+        <div class="caa-photo reveal" data-retard="1">
+          <img data-editable-zone="sens_photo" src="photos/sensoriel-800.webp"
+               srcset="photos/sensoriel-800.webp 800w"
+               sizes="(min-width:940px) 460px, 100vw"
+               alt="Fibre optique lumineuse de l’espace sensoriel du cabinet"
+               width="899" height="1599" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="ou">
     <div class="wrap">
       <div class="tete-section reveal">
@@ -772,7 +992,7 @@ footer a:hover { color: var(--vert) }
           <div class="carte-txt">
             <span class="sigle">Le cabinet</span>
             <h3>5 rue de la Brasserie, Béziers</h3>
-            <p data-editable-zone="ou_cabinet">Un espace pensé pour les sens, avec le matériel sous la main. Le cabinet est à l'étage : il n'est pas accessible en fauteuil, et c'est pourquoi certains accompagnements se font uniquement à domicile.</p>
+            <p data-editable-zone="ou_cabinet">Un espace pensé pour les sens, avec le matériel sous la main. <strong>Le cabinet est en sous-sol</strong> : on ouvre la porte sur un escalier qui y plonge, sans rampe. Il n’est donc pas accessible en fauteuil ni aux personnes à mobilité réduite. Je ne suis pas propriétaire des lieux et ne peux pas faire ces travaux — c’est pourquoi certains accompagnements se font uniquement à domicile.</p>
           </div>
         </article>
 
@@ -837,9 +1057,40 @@ footer a:hover { color: var(--vert) }
                donnera. -->
           <div class="encart" style="margin-top:30px">
             <h3 data-editable-zone="formations_titre">Me former fait partie du travail</h3>
-            <p data-editable-zone="formations_texte_1">Je me forme très régulièrement et je me remets à jour — ABA, CAA, et le reste. J'y mets une importance capitale, parce que les pratiques évoluent et qu'un accompagnement fondé sur ce qui se faisait il y a dix ans n'est pas un accompagnement.</p>
+            <p data-editable-zone="formations_texte_1">Se former, c’est continuer à questionner sa pratique. Mon parcours s’est construit au fil des années et continue d’évoluer grâce à des formations régulières autour du développement de l’enfant, de l’autisme, de la communication, des apprentissages, du comportement, de la sensorialité et de la régulation émotionnelle.</p>
             <p data-editable-zone="formations_texte_2">Je travaille dans le cadre des <strong>recommandations de la Haute Autorité de Santé</strong>. C'est ce qui garantit que ce que je propose à votre enfant a été évalué ailleurs que dans mon seul cabinet.</p>
-            <p class="a-completer" data-editable-zone="parcours_formations">Le détail de mes formations sera précisé ici.</p>
+            <div class="formations">
+              <div class="formation">
+                <h4 data-editable-zone="form_1_titre">Autisme &amp; troubles du neurodéveloppement</h4>
+                <p data-editable-zone="form_1_texte">Accompagnement des personnes avec Trouble du Spectre de l’Autisme (TSA) et autres Troubles du Neurodéveloppement (TND) · intervention précoce · approche ESDM / modèle de Denver · particularités du développement et du fonctionnement de l’enfant autiste.</p>
+              </div>
+              <div class="formation">
+                <h4 data-editable-zone="form_2_titre">Analyse du comportement &amp; accompagnement éducatif</h4>
+                <p data-editable-zone="form_2_texte">Les grands principes de l’ABA, les comportements-défis et l’analyse fonctionnelle · stratégies éducatives et développement des compétences · évaluation VB-MAPP · ateliers autonomes · approche Montessori.</p>
+              </div>
+              <div class="formation">
+                <h4 data-editable-zone="form_3_titre">Communication &amp; langage</h4>
+                <p data-editable-zone="form_3_texte">Communication Alternative et Améliorée (CAA) · outils de communication robustes · PECS · pictogrammes et supports visuels · signes issus de la LSF · sensibilisation aux Troubles Développementaux du Langage (TDL).</p>
+              </div>
+              <div class="formation">
+                <h4 data-editable-zone="form_4_titre">Sensorialité &amp; développement psychomoteur</h4>
+                <p data-editable-zone="form_4_texte">Particularités et profils sensoriels · accompagnement de la régulation sensorielle · réflexes archaïques · outils autour du développement corporel et psychomoteur.</p>
+              </div>
+              <div class="formation">
+                <h4 data-editable-zone="form_5_titre">Émotions, régulation &amp; système nerveux</h4>
+                <p data-editable-zone="form_5_texte">Co-régulation et autorégulation · système nerveux autonome · sensibilisation à la théorie polyvagale · approche trauma-informed · accompagnement des émotions et stratégies de régulation.</p>
+              </div>
+              <div class="formation">
+                <h4 data-editable-zone="form_6_titre">Relation &amp; outils complémentaires</h4>
+                <p data-editable-zone="form_6_texte">Communication NonViolente (CNV) · EFT · outils psychopédagogiques.</p>
+              </div>
+              <div class="formation formation-encours">
+                <h4 data-editable-zone="form_7_titre">Formation en cours</h4>
+                <p data-editable-zone="form_7_texte">Touch for Health® — kinésiologie.</p>
+              </div>
+            </div>
+
+            <p style="margin-top:22px" data-editable-zone="formations_texte_3">Ma pratique ne repose pas sur une méthode unique. Ces différentes formations constituent une boîte à outils que j’adapte à chaque enfant, à son fonctionnement, à ses besoins et à son environnement.</p>
           </div>
         </div>
       </div>
@@ -847,6 +1098,94 @@ footer a:hover { color: var(--vert) }
   </section>
 
   <!-- ========================== TEMOIGNAGES ========================= -->
+  <!-- =========================== GALERIE ==========================
+       Ses propres photos, envoyees le 2026-09-10. Elles annulent et
+       remplacent les images d'illustration : un parent qui cherche un
+       lieu pour son enfant veut voir CE lieu. -->
+  <section id="galerie">
+    <div class="wrap">
+      <div class="tete-section reveal">
+        <div class="brindille"></div>
+        <p class="surtitre" data-editable-zone="galerie_surtitre">Le cabinet en images</p>
+        <h2 data-editable-zone="galerie_titre">Le matériel, les ateliers, le lieu</h2>
+        <p data-editable-zone="galerie_intro">Ce que les enfants trouvent en arrivant. Rien de mis en scène : ce sont les outils que j’utilise vraiment, photographiés au fil des séances.</p>
+      </div>
+
+      <div class="galerie reveal">
+        <figure>
+          <img data-editable-zone="galerie_01" src="photos/galerie-01.webp" alt="Un tableau de langage assisté sur tablette"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Un tableau de langage assisté sur tablette</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_02" src="photos/galerie-02.webp" alt="Le mur de pictogrammes du cabinet"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Le mur de pictogrammes du cabinet</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_03" src="photos/galerie-03.webp" alt="Fibre optique de l’espace sensoriel"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Fibre optique de l’espace sensoriel</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_04" src="photos/galerie-04.webp" alt="Un bac de recherche sensorielle"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Un bac de recherche sensorielle</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_05" src="photos/galerie-05.webp" alt="Encastrements colorés"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Encastrements colorés</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_06" src="photos/galerie-06.webp" alt="Jeux de pression et de décharge"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Jeux de pression et de décharge</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_07" src="photos/galerie-07.webp" alt="Matériel de motricité fine"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Matériel de motricité fine</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_08" src="photos/galerie-08.webp" alt="Boutons-poussoirs pour prendre la parole"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Boutons-poussoirs pour prendre la parole</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_09" src="photos/galerie-09.webp" alt="Atelier de pinces et de couleurs"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Atelier de pinces et de couleurs</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_10" src="photos/galerie-10.webp" alt="Aimants de construction"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Aimants de construction</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_11" src="photos/galerie-11.webp" alt="Le coin des lettres et de l’écriture"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Le coin des lettres et de l’écriture</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_12" src="photos/galerie-12.webp" alt="Blocs de construction et tablette de CAA"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Blocs de construction et tablette de CAA</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_13" src="photos/galerie-13.webp" alt="Un bac sensoriel de saison"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>Un bac sensoriel de saison</figcaption>
+        </figure>
+        <figure>
+          <img data-editable-zone="galerie_14" src="photos/galerie-14.webp" alt="L’enseigne du cabinet"
+               width="700" height="700" loading="lazy" decoding="async">
+          <figcaption>L’enseigne du cabinet</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <section id="temoignages">
     <div class="wrap">
       <div class="tete-section reveal">
@@ -1002,6 +1341,10 @@ footer a:hover { color: var(--vert) }
             <span aria-hidden="true">📞</span>
             <span><b data-editable-zone="contact_telephone">07 88 28 20 82</b><small>Appeler</small></span>
           </a>
+          <a href="https://wa.me/33788282082" target="_blank" rel="noopener" data-editable-zone="contact_lien_whatsapp">
+            <span aria-hidden="true">🟢</span>
+            <span><b>Écrire sur WhatsApp</b><small>Le plus simple pour me joindre — je réponds dès que je sors de séance</small></span>
+          </a>
           <a href="sms:+33788282082" data-editable-zone="contact_lien_sms">
             <span aria-hidden="true">💬</span>
             <span><b>Prendre rendez-vous par SMS</b><small>Je suis souvent en séance : le SMS est le plus sûr</small></span>
@@ -1025,11 +1368,18 @@ footer a:hover { color: var(--vert) }
 
 </main>
 
+<!-- Le numero est celui qu'elle a dicte : 07 88 28 20 82. Au format
+     international sans espaces ni signe plus, comme wa.me l'exige. -->
+<a class="wa" href="https://wa.me/33788282082" target="_blank" rel="noopener"
+   aria-label="Écrire à Georgia sur WhatsApp" title="Écrire sur WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.19-.54.06-.25-.12-1.05-.38-1.99-1.23-.74-.65-1.23-1.46-1.38-1.71-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.25-.85.84-.85 2.03s.87 2.35 1 2.51c.12.16 1.71 2.61 4.14 3.66.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+</a>
+
 <!-- La barre d'appel. MOBILE UNIQUEMENT : sur un ordinateur un
      bouton << Appeler >> ne mene nulle part, et une barre fixe y
      mange de la hauteur pour rien. -->
 <div class="barre-appel" aria-label="Contact rapide">
-  <a class="bt bt-nu" href="sms:+33788282082">💬 SMS</a>
+  <a class="bt bt-nu" href="https://wa.me/33788282082" target="_blank" rel="noopener">🟢 WhatsApp</a>
   <a class="bt bt-plein" href="tel:+33788282082">📞 Appeler</a>
 </div>
 
