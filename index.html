@@ -231,6 +231,33 @@ body::before {
 .entete nav a:not(.bt) { font-size: 15px; text-decoration: none; color: var(--vert-mid); font-weight: 500 }
 .entete nav a:not(.bt):hover { color: var(--vert) }
 @media (max-width: 920px) { .entete nav a:not(.bt) { display: none } }
+/* MENU TELEPHONE. Sous 920 px les liens etaient simplement masques :
+   sur son telephone, Georgia ne voyait aucun menu et a demande << des
+   onglets a cliquer >>. Un bouton ouvre la meme liste en panneau. */
+.burger { display: none }
+@media (max-width: 920px) {
+  .burger {
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+    width: 46px; height: 46px; border: 1px solid var(--greige); border-radius: 999px;
+    background: rgba(255,255,255,.75); color: var(--vert); cursor: pointer; padding: 0;
+  }
+}
+/* Sous 480 px, le bouton << Me contacter >> de l'entete cede sa place :
+   la barre du bas porte deja WhatsApp et l'appel, et le menu garde un
+   lien vers le contact. Sans ca l'entete debordait. */
+@media (max-width: 480px) { .entete nav .bt { display: none } }
+.burger svg { width: 22px; height: 22px }
+.menu-mobile {
+  position: absolute; top: 100%; left: 0; right: 0;
+  background: var(--creme); border-bottom: 1px solid var(--greige);
+  box-shadow: 0 18px 40px rgba(56,82,74,.14); padding: 6px 22px 16px;
+}
+.menu-mobile a {
+  display: flex; align-items: center; min-height: 50px; text-decoration: none;
+  color: var(--vert); font-size: 17px; font-weight: 500; border-bottom: 1px solid var(--greige);
+}
+.menu-mobile a:last-child { border-bottom: 0; color: var(--dore-txt); font-weight: 600 }
+@media (min-width: 921px) { .menu-mobile { display: none !important } }
 
 /* =====================================================================
    HERO
@@ -748,7 +775,20 @@ footer a:hover { color: var(--vert) }
       <a href="#financement">Financement</a>
       <a href="#contact" class="bt bt-plein" style="min-height:46px;padding:0 22px;font-size:15px">Me contacter</a>
     </nav>
+    <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </div>
+  <nav class="menu-mobile" id="menu-mobile" hidden>
+    <a href="#accompagnements">Accompagnements</a>
+    <a href="#caa">La CAA</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#parcours">Qui je suis</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#temoignages">Témoignages</a>
+    <a href="#financement">Financement</a>
+    <a href="#contact">Me contacter</a>
+  </nav>
 </header>
 
 <main id="top">
@@ -1517,5 +1557,20 @@ footer a:hover { color: var(--vert) }
 })();
 </script>
 
+<script>
+(function () {
+  var b = document.getElementById('burger'), m = document.getElementById('menu-mobile');
+  if (!b || !m) return;
+  function fermer() { m.hidden = true; b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-label', 'Ouvrir le menu'); }
+  b.addEventListener('click', function () {
+    var ouvrir = m.hidden;
+    m.hidden = !ouvrir;
+    b.setAttribute('aria-expanded', ouvrir ? 'true' : 'false');
+    b.setAttribute('aria-label', ouvrir ? 'Fermer le menu' : 'Ouvrir le menu');
+  });
+  m.addEventListener('click', function (e) { if (e.target.closest('a')) fermer(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') fermer(); });
+})();
+</script>
 </body>
 </html>
