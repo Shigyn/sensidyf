@@ -167,6 +167,18 @@ body::before {
   font-size: 12px; font-weight: 700; letter-spacing: .18em;
   text-transform: uppercase; color: var(--dore-txt);
 }
+/* Son second titre, demande par Georgia le 2026-09-11. En capitales
+   espacees comme le premier, la ligne ferait cinquante caracteres
+   et casserait sur deux niveaux au telephone : en bas de casse, un
+   cran plus grand, elle se lit comme la suite de << Psychopedagogue >>
+   sans lui disputer la place. */
+.surtitre-2 {
+  margin-top: 6px; font-size: 15px; font-weight: 600; line-height: 1.4;
+  color: var(--dore-txt);
+  /* Au telephone la ligne passe sur deux niveaux et laissait
+     << educatifs >> seul en bas : on equilibre la coupure. */
+  text-wrap: balance;
+}
 /* La brindille : le trait de section. Il se dessine a l'entree, comme
    une pousse — c'est l'arbre de son logo, reduit a un geste. */
 .brindille {
@@ -754,6 +766,7 @@ footer a:hover { color: var(--vert) }
     <div class="hero-in">
       <div class="wrap">
         <p class="surtitre reveal" data-vu data-editable-zone="hero_surtitre">Psychopédagogue — Béziers</p>
+        <p class="surtitre-2 reveal" data-vu data-editable-zone="hero_surtitre_2">Référente de parcours et accompagnements éducatifs</p>
         <h1 class="reveal" data-vu data-retard="1" style="margin-top:18px" data-editable-zone="hero_titre">Avoir une voix, ce n'est pas seulement <em>parler</em>.</h1>
         <p class="hero-accroche reveal" data-vu data-retard="2" data-editable-zone="hero_accroche">J'accompagne les enfants et les adolescents pour qui le langage, les apprentissages et le quotidien sont difficiles. Communication, comportement, sensorialité, école : on cherche ensemble ce qui va leur permettre d'être compris.</p>
 
