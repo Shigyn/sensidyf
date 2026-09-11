@@ -230,7 +230,7 @@ body::before {
     croit voir un bouton et passe a cote. */
 .entete nav a:not(.bt) { font-size: 15px; text-decoration: none; color: var(--vert-mid); font-weight: 500 }
 .entete nav a:not(.bt):hover { color: var(--vert) }
-@media (max-width: 920px) { .entete nav a:not(.bt) { display: none } }
+@media (max-width: 920px) { .entete-in nav a:not(.bt) { display: none } }
 /* MENU TELEPHONE. Sous 920 px les liens etaient simplement masques :
    sur son telephone, Georgia ne voyait aucun menu et a demande << des
    onglets a cliquer >>. Un bouton ouvre la meme liste en panneau. */
@@ -247,16 +247,24 @@ body::before {
    lien vers le contact. Sans ca l'entete debordait. */
 @media (max-width: 480px) { .entete nav .bt { display: none } }
 .burger svg { width: 22px; height: 22px }
+/* `.entete nav { display: flex }` visait aussi ce panneau et mettait
+   les liens en ligne. `:not([hidden])` pour ne pas ecraser le
+   masquage quand il est ferme. */
+.entete .menu-mobile:not([hidden]) { display: block; margin-left: 0 }
+/* Et ferme, il doit l'etre vraiment : une regle d'auteur
+   (`.entete nav { display: flex }`) bat le `[hidden]` du navigateur,
+   et le panneau restait affiche en ligne sous l'entete. */
+.menu-mobile[hidden] { display: none !important }
 .menu-mobile {
   position: absolute; top: 100%; left: 0; right: 0;
   background: var(--creme); border-bottom: 1px solid var(--greige);
   box-shadow: 0 18px 40px rgba(56,82,74,.14); padding: 6px 22px 16px;
 }
-.menu-mobile a {
+.entete .menu-mobile a:not(.bt) {
   display: flex; align-items: center; min-height: 50px; text-decoration: none;
   color: var(--vert); font-size: 17px; font-weight: 500; border-bottom: 1px solid var(--greige);
 }
-.menu-mobile a:last-child { border-bottom: 0; color: var(--dore-txt); font-weight: 600 }
+.entete .menu-mobile a:not(.bt):last-child { border-bottom: 0; color: var(--dore-txt); font-weight: 600 }
 @media (min-width: 921px) { .menu-mobile { display: none !important } }
 
 /* =====================================================================
