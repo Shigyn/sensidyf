@@ -762,10 +762,6 @@ footer a:hover { color: var(--vert) }
   .bt:hover, .carte:hover, .coord a:hover { transform: none }
   .carte:hover .carte-img img { transform: none }
 }
-
-/* Sections preparees mais pas encore publiees (2026-09-14). */
-section[hidden] { display: none !important }
-.carte-produit .produit-prix { margin-top: 10px; font-weight: 600; font-size: 18px; color: var(--encre) }
 </style>
 </head>
 
@@ -1136,55 +1132,6 @@ section[hidden] { display: none !important }
     </div>
   </div>
 
-  <!-- ================= PERSONNES AGEES ET AIDANTS ====================
-       PREPAREE LE 2026-09-14, MASQUEE (attribut hidden) en attendant le
-       texte de Georgia, pour le Salon des aidants du 24 septembre.
-       Pour publier : remplacer les textes entre crochets (ou les saisir
-       depuis l'espace client), retirer `hidden`, ajouter le lien au menu.
-       Rien n'est invente : les crochets restent visibles tant qu'ils ne
-       sont pas remplaces, et la section est cachee d'ici la. -->
-  <section id="aines" hidden>
-    <div class="wrap">
-      <div class="tete-section reveal">
-        <div class="brindille"></div>
-        <p class="surtitre" data-editable-zone="aines_surtitre">Personnes âgées et aidants</p>
-        <h2 data-editable-zone="aines_titre">[Titre de la section]</h2>
-        <p data-editable-zone="aines_intro">[Introduction : pour qui, et ce que l’accompagnement apporte]</p>
-      </div>
-
-      <div class="cartes">
-        <article class="carte reveal">
-          <div class="carte-txt">
-            <span class="sigle" data-editable-zone="aines_carte_1_sigle">[Mot-clé]</span>
-            <h3 data-editable-zone="aines_carte_1_titre">[Accompagnement 1]</h3>
-            <p data-editable-zone="aines_carte_1_texte">[Description]</p>
-          </div>
-        </article>
-        <article class="carte reveal" data-retard="1">
-          <div class="carte-txt">
-            <span class="sigle" data-editable-zone="aines_carte_2_sigle">[Mot-clé]</span>
-            <h3 data-editable-zone="aines_carte_2_titre">[Accompagnement 2]</h3>
-            <p data-editable-zone="aines_carte_2_texte">[Description]</p>
-          </div>
-        </article>
-        <article class="carte reveal" data-retard="2">
-          <div class="carte-txt">
-            <span class="sigle" data-editable-zone="aines_carte_3_sigle">[Mot-clé]</span>
-            <h3 data-editable-zone="aines_carte_3_titre">[Accompagnement 3]</h3>
-            <p data-editable-zone="aines_carte_3_texte">[Description]</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="encart reveal" style="margin-top:34px">
-        <h3 data-editable-zone="aines_aidants_titre">[Pour les aidants]</h3>
-        <p data-editable-zone="aines_aidants_texte">[Ce que Georgia propose aux aidants : écoute, conseils, relais…]</p>
-      </div>
-
-      <p class="reveal" style="margin-top:28px"><a class="bt bt-plein" href="#contact" data-editable-zone="aines_cta">Me contacter</a></p>
-    </div>
-  </section>
-
   <!-- ========================== QUI JE SUIS ========================= -->
   <section id="parcours">
     <div class="wrap">
@@ -1389,45 +1336,6 @@ section[hidden] { display: none !important }
     </div>
   </section>
 
-  <!-- ========================== INFORMATIONS =========================
-       PREPAREE LE 2026-09-14, MASQUEE : Georgia doit preciser ce qu'elle
-       veut y mettre (actualites, conseils, ressources pour les aidants).
-       Trois cartes modifiables depuis son espace. -->
-  <section id="infos" hidden>
-    <div class="wrap">
-      <div class="tete-section reveal">
-        <div class="brindille"></div>
-        <p class="surtitre" data-editable-zone="infos_surtitre">Informations</p>
-        <h2 data-editable-zone="infos_titre">[Actualités et ressources]</h2>
-        <p data-editable-zone="infos_intro">[Une phrase d’introduction]</p>
-      </div>
-
-      <div class="cartes">
-        <article class="carte reveal">
-          <div class="carte-txt">
-            <span class="sigle" data-editable-zone="info_1_etiquette">[Date ou thème]</span>
-            <h3 data-editable-zone="info_1_titre">[Titre]</h3>
-            <p data-editable-zone="info_1_texte">[Texte]</p>
-          </div>
-        </article>
-        <article class="carte reveal" data-retard="1">
-          <div class="carte-txt">
-            <span class="sigle" data-editable-zone="info_2_etiquette">[Date ou thème]</span>
-            <h3 data-editable-zone="info_2_titre">[Titre]</h3>
-            <p data-editable-zone="info_2_texte">[Texte]</p>
-          </div>
-        </article>
-        <article class="carte reveal" data-retard="2">
-          <div class="carte-txt">
-            <span class="sigle" data-editable-zone="info_3_etiquette">[Date ou thème]</span>
-            <h3 data-editable-zone="info_3_titre">[Titre]</h3>
-            <p data-editable-zone="info_3_texte">[Texte]</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <!-- Respiration avant les prix. La moitie gauche de la photo est
        sombre (luminance moyenne mesuree a 49/255) : voile vert et
        texte clair, comme la bande de la salle sensorielle. -->
@@ -1499,53 +1407,6 @@ section[hidden] { display: none !important }
   </section>
 
   <!-- ========================== CONTACT ============================ -->
-  <!-- ============================ BOUTIQUE ===========================
-       PREPAREE LE 2026-09-14, MASQUEE : Georgia veut vendre (et louer ?)
-       du materiel qu'elle gere elle-meme. En attente de SA liste :
-       produits, photos, prix, vente et/ou location. Pour l'instant sans
-       paiement en ligne : « Commander » mene au formulaire de contact.
-       C'est la formule e-commerce dans la grille LocWeb : a regler avec
-       Nicolas avant de publier. -->
-  <section id="boutique" hidden>
-    <div class="wrap">
-      <div class="tete-section reveal">
-        <div class="brindille"></div>
-        <p class="surtitre" data-editable-zone="boutique_surtitre">Boutique</p>
-        <h2 data-editable-zone="boutique_titre">[Matériel et outils]</h2>
-        <p data-editable-zone="boutique_intro">[Ce qui est proposé à la vente ou à la location, et comment commander]</p>
-      </div>
-
-      <div class="cartes">
-        <article class="carte carte-produit reveal">
-          <div class="carte-img"><img data-editable-zone="boutique_1_photo" src="photos/materiel-800.webp" alt="" width="800" height="534" loading="lazy" decoding="async"></div>
-          <div class="carte-txt">
-            <h3 data-editable-zone="boutique_1_nom">[Produit 1]</h3>
-            <p data-editable-zone="boutique_1_texte">[Description courte]</p>
-            <p class="produit-prix" data-editable-zone="boutique_1_prix">[Prix]</p>
-          </div>
-        </article>
-        <article class="carte carte-produit reveal" data-retard="1">
-          <div class="carte-img"><img data-editable-zone="boutique_2_photo" src="photos/materiel-800.webp" alt="" width="800" height="534" loading="lazy" decoding="async"></div>
-          <div class="carte-txt">
-            <h3 data-editable-zone="boutique_2_nom">[Produit 2]</h3>
-            <p data-editable-zone="boutique_2_texte">[Description courte]</p>
-            <p class="produit-prix" data-editable-zone="boutique_2_prix">[Prix]</p>
-          </div>
-        </article>
-        <article class="carte carte-produit reveal" data-retard="2">
-          <div class="carte-img"><img data-editable-zone="boutique_3_photo" src="photos/materiel-800.webp" alt="" width="800" height="534" loading="lazy" decoding="async"></div>
-          <div class="carte-txt">
-            <h3 data-editable-zone="boutique_3_nom">[Produit 3]</h3>
-            <p data-editable-zone="boutique_3_texte">[Description courte]</p>
-            <p class="produit-prix" data-editable-zone="boutique_3_prix">[Prix]</p>
-          </div>
-        </article>
-      </div>
-
-      <p class="reveal" style="margin-top:28px"><a class="bt bt-plein" href="#contact" data-editable-zone="boutique_cta">Commander ou poser une question</a></p>
-    </div>
-  </section>
-
   <section id="contact">
     <div class="wrap">
      <div class="contact-grille">
