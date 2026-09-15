@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sensi'Dyf — Georgia Gomez, psychopédagogue à Béziers</title>
-<meta name="description" content="Georgia Gomez, psychopédagogue à Béziers. Accompagnement d'enfants et d'adolescents avec troubles du neurodéveloppement : TSA, T21, TDL, DYS, TDA(H), déficience intellectuelle. CAA, approche ABA, réflexes archaïques, rééducation oro-myo-faciale.">
+<meta name="description" content="Georgia Gomez, psychopédagogue à Béziers. Accompagnement d'enfants, d'adolescents, d'adultes et de seniors : troubles du neurodéveloppement, handicap, maladie ou accident de la vie. CAA, approche ABA, stimulation cognitive, réflexes archaïques.">
 <meta property="og:title" content="Sensi'Dyf — Georgia Gomez, psychopédagogue à Béziers">
 <meta property="og:description" content="Redonner une voix aux enfants pour qui le langage et la communication sont difficiles. CAA, comportements défis, réflexes archaïques, accompagnement scolaire et parental.">
 <meta property="og:type" content="website">
@@ -37,7 +37,7 @@
   "@type": "ProfessionalService",
   "name": "Sensi'Dyf — Georgia Gomez, psychopédagogue",
   "alternateName": "Sensi'Dyf",
-  "description": "Accompagnement psychopédagogique d'enfants et d'adolescents présentant des troubles du neurodéveloppement à Béziers : autisme, trisomie 21, syndromes génétiques, trouble développemental du langage, déficience intellectuelle, DYS, TDA(H). Communication alternative et augmentée, gestion des comportements défis selon l'approche ABA, réintégration des réflexes archaïques, rééducation oro-myo-faciale, accompagnement à la parentalité et aide aux démarches MDPH.",
+  "description": "Accompagnement psychopédagogique d'enfants, d'adolescents, d'adultes et de seniors présentant des troubles du neurodéveloppement à Béziers : autisme, trisomie 21, syndromes génétiques, trouble développemental du langage, déficience intellectuelle, DYS, TDA(H). Communication alternative et augmentée, gestion des comportements défis selon l'approche ABA, réintégration des réflexes archaïques, rééducation oro-myo-faciale, accompagnement à la parentalité et aide aux démarches MDPH.",
   "image": "https://shigyn.github.io/sensidyf/photos/hero-1600.webp",
   "url": "https://shigyn.github.io/sensidyf/",
   "telephone": "+33788282082",
@@ -220,7 +220,9 @@ body::before {
 .marque img { width: 40px; height: 40px; border-radius: 999px }
 .marque b { font-family: var(--disp); font-weight: 700; font-size: 21px; letter-spacing: -.01em; color: var(--vert) }
 .marque small { display: block; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--plume); font-weight: 600 }
-.entete nav { margin-left: auto; display: flex; gap: 26px; align-items: center }
+.entete nav { margin-left: auto; display: flex; gap: 22px; align-items: center }
+/* Huit liens depuis la rubrique Adultes (2026-09-15) : jamais sur deux lignes. */
+.entete nav a { white-space: nowrap }
 /*  `:not(.bt)` n'est pas une precaution de style, c'est une
     correction. `.entete nav a` pese plus lourd que `.bt-plein` dans
     la cascade : sans l'exclusion, le bouton << Me contacter >> de
@@ -230,12 +232,12 @@ body::before {
     croit voir un bouton et passe a cote. */
 .entete nav a:not(.bt) { font-size: 15px; text-decoration: none; color: var(--vert-mid); font-weight: 500 }
 .entete nav a:not(.bt):hover { color: var(--vert) }
-@media (max-width: 920px) { .entete-in nav a:not(.bt) { display: none } }
+@media (max-width: 1240px) { .entete-in nav a:not(.bt) { display: none } }
 /* MENU TELEPHONE. Sous 920 px les liens etaient simplement masques :
    sur son telephone, Georgia ne voyait aucun menu et a demande << des
    onglets a cliquer >>. Un bouton ouvre la meme liste en panneau. */
 .burger { display: none }
-@media (max-width: 920px) {
+@media (max-width: 1240px) {
   .burger {
     display: inline-flex; align-items: center; justify-content: center; flex: none;
     width: 46px; height: 46px; border: 1px solid var(--greige); border-radius: 999px;
@@ -265,7 +267,7 @@ body::before {
   color: var(--vert); font-size: 17px; font-weight: 500; border-bottom: 1px solid var(--greige);
 }
 .entete .menu-mobile a:not(.bt):last-child { border-bottom: 0; color: var(--dore-txt); font-weight: 600 }
-@media (min-width: 921px) { .menu-mobile { display: none !important } }
+@media (min-width: 1241px) { .menu-mobile { display: none !important } }
 
 /* =====================================================================
    HERO
@@ -762,6 +764,14 @@ footer a:hover { color: var(--vert) }
   .bt:hover, .carte:hover, .coord a:hover { transform: none }
   .carte:hover .carte-img img { transform: none }
 }
+
+/* Rubrique Adultes, seniors & handicap (2026-09-15) : textes longs,
+   donc deux colonnes au plus. */
+.adultes-intro { display: grid; gap: 12px; max-width: 62em; margin-bottom: 30px }
+.cartes-larges { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)) }
+.cartes-larges .carte-txt { display: grid; gap: 12px; align-content: start }
+.cartes-larges .caa-liste { margin-top: 4px }
+.adultes-fin { max-width: 62em; margin-top: 10px }
 </style>
 </head>
 
@@ -776,6 +786,7 @@ footer a:hover { color: var(--vert) }
     <nav>
       <a href="#accompagnements">Accompagnements</a>
       <a href="#caa">La CAA</a>
+      <a href="#adultes">Adultes &amp; seniors</a>
       <a href="#galerie">Galerie</a>
       <a href="#parcours">Qui je suis</a>
       <a href="#tarifs">Tarifs</a>
@@ -790,6 +801,7 @@ footer a:hover { color: var(--vert) }
   <nav class="menu-mobile" id="menu-mobile" hidden>
     <a href="#accompagnements">Accompagnements</a>
     <a href="#caa">La CAA</a>
+    <a href="#adultes">Adultes &amp; seniors</a>
     <a href="#galerie">Galerie</a>
     <a href="#parcours">Qui je suis</a>
     <a href="#tarifs">Tarifs</a>
@@ -816,7 +828,7 @@ footer a:hover { color: var(--vert) }
         <p class="surtitre reveal" data-vu data-editable-zone="hero_surtitre">Psychopédagogue — Béziers</p>
         <p class="surtitre-2 reveal" data-vu data-editable-zone="hero_surtitre_2">Référente de parcours et accompagnements éducatifs</p>
         <h1 class="reveal" data-vu data-retard="1" style="margin-top:18px" data-editable-zone="hero_titre">Avoir une voix, ce n'est pas seulement <em>parler</em>.</h1>
-        <p class="hero-accroche reveal" data-vu data-retard="2" data-editable-zone="hero_accroche">J'accompagne les enfants et les adolescents pour qui le langage, les apprentissages et le quotidien sont difficiles. Communication, comportement, sensorialité, école : on cherche ensemble ce qui va leur permettre d'être compris.</p>
+        <p class="hero-accroche reveal" data-vu data-retard="2" data-editable-zone="hero_accroche">J'accompagne les enfants, les adolescents et les adultes dont la communication, les apprentissages, l'autonomie ou les fonctions cognitives sont fragilisés par un trouble du neurodéveloppement, un handicap, une maladie ou un accident de la vie.</p>
 
         <div class="publics reveal" data-vu data-retard="3" data-editable-zone="hero_publics">
           <span>TSA</span><span>T21</span><span>TDL</span><span>DYS</span><span>TDA(H)</span><span>Déficience intellectuelle</span><span>Syndromes génétiques</span><span>Handicap moteur</span><span>Polyhandicap</span>
@@ -887,7 +899,7 @@ footer a:hover { color: var(--vert) }
     <div class="wrap">
       <div class="tete-section reveal">
         <div class="brindille"></div>
-        <h2 data-editable-zone="services_titre">Nos prestations</h2>
+        <h2 data-editable-zone="services_titre">Mes prestations</h2>
         <p data-editable-zone="services_intro">Chaque accompagnement se construit à partir de l'enfant et de sa famille, jamais d'un protocole appliqué à l'identique. Voici les outils dont je dispose.</p>
       </div>
 
@@ -953,7 +965,7 @@ footer a:hover { color: var(--vert) }
           <div class="carte-txt">
             <span class="sigle">Polyhandicap</span>
             <h3>Accompagnement du polyhandicap</h3>
-            <p data-editable-zone="service_polyhandicap">Maintenir les fonctions exécutives, la mémoire, un niveau scolaire quand il y en a un, et proposer des activités éducatives, pédagogiques ou simplement ludiques. Cet accompagnement se fait <strong>à domicile</strong> : mon cabinet est à l'étage.</p>
+            <p data-editable-zone="service_polyhandicap">Maintenir les fonctions exécutives, la mémoire, un niveau scolaire quand il y en a un, et proposer des activités éducatives, pédagogiques ou simplement ludiques. Cet accompagnement se fait <strong>à domicile</strong> : mon cabinet est en sous-sol, accessible uniquement par un escalier.</p>
           </div>
         </article>
       </div>
@@ -988,7 +1000,7 @@ footer a:hover { color: var(--vert) }
           <div class="carte-txt">
             <span class="sigle">MDPH</span>
             <h3>Aide aux démarches</h3>
-            <p data-editable-zone="service_mdph">Aide au montage du dossier MDPH : ce qu'il faut y mettre, comment le formuler, quelles pièces réunir. Un dossier bien construit change ce qui sera accordé.</p>
+            <p data-editable-zone="service_mdph">Je vous aide à constituer un dossier clair et complet, afin que les besoins et le quotidien de la personne soient décrits le plus précisément possible. Un dossier bien construit peut faire la différence dans l’évaluation des besoins et des aides accordées.</p>
           </div>
         </article>
       </div>
@@ -1013,7 +1025,7 @@ footer a:hover { color: var(--vert) }
       <div class="caa-grille">
         <div class="reveal">
           <p data-editable-zone="caa_texte_1">La <strong>Communication Alternative et Améliorée</strong> est au cœur de ma pratique. Communiquer, ce n’est pas uniquement prononcer des mots. C’est pouvoir demander, refuser, choisir, raconter, partager une émotion, poser une question, entrer en relation… et être entendu.</p>
-          <p data-editable-zone="caa_texte_2">Lorsqu’un enfant ne parle pas, parle peu, ou que sa parole ne lui permet pas d’exprimer tout ce qu’il souhaite, nous recherchons ensemble le moyen de communication qui lui correspond.</p>
+          <p data-editable-zone="caa_texte_2">Lorsqu’un enfant ne parle pas, parle peu, ou que sa parole ne lui permet pas d’exprimer tout ce qu’il souhaite, je recherche avec lui le moyen de communication qui lui correspond.</p>
 
           <p style="margin-top:20px" data-editable-zone="caa_supports_titre"><strong>Selon ses besoins, ses capacités et son environnement :</strong></p>
           <ul class="caa-liste">
@@ -1021,9 +1033,10 @@ footer a:hover { color: var(--vert) }
             <li data-editable-zone="caa_outil_2">Supports visuels et PECS</li>
             <li data-editable-zone="caa_outil_3">Tableaux de langage assisté</li>
             <li data-editable-zone="caa_outil_4">Outils numériques : TD Snap, Proloquo2Go, Grid</li>
+            <li data-editable-zone="caa_outil_5">Modes d’accès adaptés, dont la commande oculaire, quand les capacités motrices ne permettent pas une utilisation classique</li>
           </ul>
 
-          <p data-editable-zone="caa_texte_3" style="margin-top:22px">Quand nous nous orientons vers un outil numérique, je privilégie des systèmes robustes et personnalisables, capables d’évoluer avec l’enfant. Le vocabulaire, l’organisation et les accès s’adaptent progressivement aux situations qu’il rencontre réellement dans son quotidien.</p>
+          <p data-editable-zone="caa_texte_3" style="margin-top:22px">Quand je m’oriente vers un outil numérique, je privilégie des systèmes robustes et personnalisables, capables d’évoluer avec l’enfant. Le vocabulaire, l’organisation et les accès s’adaptent progressivement aux situations qu’il rencontre réellement dans son quotidien.</p>
         </div>
 
         <div class="caa-photo reveal" data-retard="1">
@@ -1083,6 +1096,108 @@ footer a:hover { color: var(--vert) }
                width="760" height="760" loading="lazy" decoding="async">
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= ADULTES, SENIORS & HANDICAP ====================
+       Texte ecrit par Georgia, envoye le 2026-09-15, repris tel quel. -->
+  <section id="adultes">
+    <div class="wrap">
+      <div class="tete-section reveal">
+        <div class="brindille"></div>
+        <p class="surtitre">Communiquer, maintenir ses capacités et favoriser l’autonomie</p>
+        <h2>Adultes, seniors &amp; handicap</h2>
+        <p>Les besoins d’accompagnement, de communication et de stimulation cognitive ne s’arrêtent pas à l’enfance.</p>
+      </div>
+
+      <div class="adultes-intro reveal">
+        <p>J’accompagne également les adultes et les personnes âgées présentant une déficience intellectuelle, un handicap, des difficultés de communication, ou dont les capacités ont été fragilisées au cours de la vie par une maladie, un AVC ou une lésion cérébrale.</p>
+        <p>L’accompagnement est individualisé en fonction des capacités, des besoins, du mode de communication et du quotidien de chaque personne.</p>
+      </div>
+
+      <div class="cartes cartes-larges">
+        <article class="carte reveal">
+          <div class="carte-txt">
+            <span class="sigle">Handicap</span>
+            <h3>Déficience intellectuelle et handicap</h3>
+            <p>Une personne présentant une déficience intellectuelle peut rencontrer des difficultés pour comprendre certaines informations, exprimer ses besoins, faire des choix, se repérer dans son quotidien ou acquérir et maintenir certaines compétences.</p>
+            <p>L’accompagnement peut permettre de travailler autour de :</p>
+            <ul class="caa-liste">
+              <li>la compréhension et l’expression ;</li>
+              <li>la communication fonctionnelle ;</li>
+              <li>l’autonomie dans la vie quotidienne ;</li>
+              <li>le repérage dans le temps et l’espace ;</li>
+              <li>l’attention, la mémoire et le raisonnement ;</li>
+              <li>l’apprentissage ou le maintien de compétences ;</li>
+              <li>l’expression des besoins, des émotions et des choix ;</li>
+              <li>l’utilisation d’outils adaptés et de supports visuels.</li>
+            </ul>
+            <p>L’objectif est de partir des capacités de la personne et de lui proposer des outils concrets qui favorisent sa participation, son autonomie et sa qualité de vie.</p>
+          </div>
+        </article>
+
+        <article class="carte reveal" data-retard="1">
+          <div class="carte-txt">
+            <span class="sigle">CAA</span>
+            <h3>Communication Alternative et Améliorée (CAA)</h3>
+            <p>Lorsqu’une personne ne parle pas, parle peu ou que sa parole ne lui permet pas d’exprimer tout ce qu’elle souhaite, la Communication Alternative et Améliorée (CAA) peut lui offrir d’autres moyens de communiquer.</p>
+            <p>Cela peut concerner une personne présentant une déficience intellectuelle, un polyhandicap, des troubles importants de la communication, ou encore une personne ayant perdu tout ou partie de ses capacités de communication à la suite d’un AVC, d’une lésion cérébrale ou d’une maladie.</p>
+            <p>Selon les capacités et les besoins de la personne, différents moyens peuvent être explorés : pictogrammes, supports visuels, tableaux de communication, outils numériques, logiciels de CAA et différents modes d’accès.</p>
+            <p>Lorsque les capacités motrices ne permettent pas une utilisation classique de l’outil, des solutions d’accès adaptées, notamment la <strong>commande oculaire</strong>, peuvent également être envisagées en lien avec les professionnels compétents.</p>
+            <p>Pouvoir dire « oui », « non », « j’ai mal », « je veux », « je ne veux pas », choisir, demander, refuser, raconter ou participer à une conversation, c’est pouvoir continuer à être acteur de sa propre vie.</p>
+          </div>
+        </article>
+
+        <article class="carte reveal">
+          <div class="carte-txt">
+            <span class="sigle">Cognition</span>
+            <h3>Maintien et stimulation des fonctions cognitives</h3>
+            <p>Chez l’adulte comme chez la personne âgée, l’accompagnement peut également viser à solliciter et à maintenir les capacités existantes :</p>
+            <ul class="caa-liste">
+              <li>mémoire ;</li>
+              <li>attention et concentration ;</li>
+              <li>raisonnement ;</li>
+              <li>fonctions exécutives ;</li>
+              <li>compréhension ;</li>
+              <li>repérage spatio-temporel ;</li>
+              <li>organisation et planification ;</li>
+              <li>compétences utiles dans la vie quotidienne.</li>
+            </ul>
+            <p>Les activités sont adaptées au niveau de compréhension, aux possibilités, aux centres d’intérêt et au rythme de chacun.</p>
+            <p>Il ne s’agit pas de rechercher la performance, mais de valoriser les capacités présentes, maintenir les acquis et favoriser autant que possible l’autonomie et la participation au quotidien.</p>
+          </div>
+        </article>
+
+        <article class="carte reveal" data-retard="1">
+          <div class="carte-txt">
+            <span class="sigle">AVC</span>
+            <h3>Après un AVC ou face à une perte de capacités</h3>
+            <p>Après un AVC, une lésion cérébrale ou face à certaines maladies évolutives, la personne peut rencontrer de nouvelles difficultés de communication, d’organisation, d’attention ou d’autonomie.</p>
+            <p>L’accompagnement peut alors porter sur l’adaptation du quotidien, la stimulation des capacités préservées et la recherche de moyens permettant à la personne de continuer à communiquer et à faire des choix.</p>
+            <p>Cet accompagnement intervient en complément des professionnels médicaux et paramédicaux et ne se substitue pas aux soins ou aux rééducations nécessaires.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="encart reveal" style="margin-top:34px">
+        <h3>Accompagner aussi les aidants</h3>
+        <p>La communication et l’autonomie se construisent aussi avec l’entourage.</p>
+        <p>J’accompagne les familles et les aidants dans la compréhension et l’utilisation des outils mis en place afin qu’ils puissent être utilisés dans la vie réelle : à la maison, pendant les repas, les soins, les loisirs, les déplacements ou les moments passés en famille.</p>
+        <p>Parce qu’un outil de communication n’a de sens que s’il permet à la personne d’être entendue, comprise et respectée dans ses choix.</p>
+      </div>
+
+      <div class="encart reveal" data-retard="1" style="margin-top:18px;border-left-color:var(--rose)">
+        <h3>Accompagnement à domicile</h3>
+        <p>Lorsque les déplacements sont difficiles ou lorsque travailler dans l’environnement quotidien est plus pertinent, les séances peuvent être réalisées à domicile.</p>
+        <p>Cela permet d’adapter directement les outils aux habitudes, aux besoins et à l’environnement réel de la personne.</p>
+      </div>
+
+      <div class="signature reveal">
+        <div class="brindille"></div>
+        <p>Chaque personne communique différemment. Chaque accompagnement doit donc l’être aussi.</p>
+      </div>
+      <p class="reveal adultes-fin">Un premier échange permet de faire le point sur les besoins, les capacités, les outils déjà utilisés et les attentes de la personne et de son entourage.</p>
+      <p class="reveal" style="margin-top:18px"><a class="bt bt-plein" href="#contact">Prendre contact</a></p>
     </div>
   </section>
 
@@ -1148,7 +1263,7 @@ footer a:hover { color: var(--vert) }
         </div>
 
         <div class="reveal" data-retard="2">
-          <blockquote class="citation" data-editable-zone="parcours_citation">Moi aussi, j'avais été cet enfant qu'on n'écoute pas vraiment. Cet enfant qu'on n'entend pas.</blockquote>
+          <blockquote class="citation" data-editable-zone="parcours_citation">Moi aussi, j'ai été cet enfant qu'on n'écoute pas vraiment. Cet enfant qu'on n'entend pas.</blockquote>
 
           <p data-editable-zone="parcours_texte_1">Depuis mes débuts dans l'éducatif, j'ai souvent accompagné des enfants mutiques ou non oralisants. Longtemps je me suis demandé pourquoi ces enfants croisaient si souvent mon chemin. C'était parfois déstabilisant : je me sentais impuissante. Mais je les comprenais toujours, et ils me faisaient confiance.</p>
 
@@ -1353,7 +1468,7 @@ footer a:hover { color: var(--vert) }
     <div class="wrap">
       <div class="tete-section reveal">
         <div class="brindille"></div>
-        <h2 data-editable-zone="tarifs_titre">Les tarifs</h2>
+        <h2 data-editable-zone="tarifs_titre">Mes tarifs</h2>
         <p data-editable-zone="tarifs_intro">Affichés, parce qu'une famille qui hésite depuis des mois a le droit de savoir avant d'appeler. Le premier échange, lui, ne coûte rien.</p>
       </div>
 
