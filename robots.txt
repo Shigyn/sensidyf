@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shigyn.github.io/sensidyf/sitemap.xml
+Sitemap: https://sensidyf.fr/sitemap.xml
