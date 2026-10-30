@@ -746,6 +746,9 @@ footer { border-top: 1px solid var(--greige); padding: 42px 0 48px; color: var(-
 .pied-grille { display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center }
 footer a { text-decoration: none }
 footer a:hover { color: var(--vert) }
+/* Le lien LocWeb : a peine plus visible, dans le vert menthe du site (2026-10-30). */
+footer a.lien-locweb { color: var(--menthe-txt); font-weight: 600 }
+footer a.lien-locweb:hover { color: var(--vert) }
 
 /* --- Entrees au scroll ------------------------------------------------------ */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .85s var(--ease), transform .85s var(--ease) }
@@ -1612,7 +1615,7 @@ footer a:hover { color: var(--vert) }
     <span>
       <a href="https://admin.locweb.fr">🔒 Administration</a>
       ·
-      <a href="https://locweb.fr" target="_blank" rel="noopener">Créé par LocWeb</a>
+      <a class="lien-locweb" href="https://locweb.fr" target="_blank" rel="noopener">Créé par LocWeb</a>
     </span>
   </div>
 </footer>
